@@ -1,0 +1,43 @@
+category: "EyeLink"
+priority: 9
+version: 0.3
+author: Zhiguo Wang [@SR-Research]
+url: http://www.sr-research.com
+description: The drift-correction error is only applied by default for EyeLink II systems. The EyeLink 1000/1000Plus/PortableDUO systems are  dirft-free and this routine does not linearly correct the calibration matrix based on the gaze error.
+controls:
+  - type: line_edit
+    label: Target X
+    var: el_drift_tar_x
+    name: line_el_drift_tar_x
+    tooltip: "The X position of the drift-correction target."
+  - type: line_edit
+    label: Target Y
+    var: el_drift_tar_y
+    name: line_el_drift_tar_y
+    tooltip: "The Y position of the drift-correction target." 
+  - type: checkbox
+    var: el_allow_setup
+    label: Allow Re-calibration if Drift-correction/check Fails
+    tooltip: "Allow pressing Escape to setup the tracker and re-calibrate."
+    name: check_box_el_allow_setup
+  - type: checkbox
+    var: el_force_drift_correct
+    label: Apply Drift-correction [EyeLink II/I ONLY]
+    tooltip: Force the tracker to drift-correct only when using EyeLInk II/I.
+    name: check_box_el_force_drift_correct
+  - type: text
+    label: Do not tick the <b>Apply Drift-correction</b> option, unless you are using EyeLink II/I. <br/> EyeLink 1000 and newer models by default use the Pupil-CR tracking algorithm, <br /> which is largely drift-free. Forcing the tracker to correct the gaze error may actually reduce tracking accuracy.
+    name: text_force_drift_correct
+  - type: combobox
+    var: el_dc_target_type
+    label: Drift-correction Target
+    tooltip: "Select what drift-correction target to use"
+    name: combobox_el_dc_target_type
+    options:
+      - 'SameAsCalibration'
+      - 'Image'
+  - type: filepool
+    var: el_dc_target_file
+    label: Custom Target Image 
+    name: filepool_el_dc_target_file
+    tooltip: Use an image as the drift-correction target    

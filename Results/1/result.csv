@@ -1,0 +1,27 @@
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,7,00:34,00:29,1707243333368.1333,1707243328291.596,1707243328889.1167,-5.076537353515625,ca-1-1,5,1,bar,b-c-z-p,7,#1,8,20,#1,False,True,64
+1,7,01:15,00:55,1707243374889.1367,1707243354321.697,1707243357993.5212,-20.567439697265623,ca-2-1,6,2,bar,b-c-z-p,8,#1,8,11,#1,False,False,63
+1,8,01:15,01:26,1707243374889.1367,1707243385387.2014,1707243388253.7922,10.498064697265624,ca-2-1,6,2,bar,b-c-z-p,8,#1,9,11,#1,False,True,63
+1,7,01:43,01:43,1707243402373.9382,1707243403042.974,1707243399263.1765,0.669035888671875,ca-4-1,8,4,bar,b-c-z-p,6,#1,8,10,#1,False,False,45
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,7,01:02,01:23,1707244046827.4895,1707244067612.193,1707244040313.3923,20.78470361328125,ca-1-1,5,1,bar,b-c-z-p,7,#1,8,20,#1,False,True,64
+1,8,01:33,01:43,1707244078188.9468,1707244088092.9805,1707244075670.6707,9.90403369140625,ca-2-1,6,2,bar,b-c-z-p,8,#1,9,11,#1,False,True,63
+1,7,02:25,02:31,1707244129344.5847,1707244134628.606,1707244120190.6587,5.284021240234375,ca-3-1,7,3,bar,b-c-z-p,7,#1,8,17,#1,False,True,96
+1,6,02:46,02:31,1707244150883.8845,1707244134628.606,1707244145455.9363,-16.255278564453125,ca-4-1,8,4,bar,b-c-z-p,6,#1,7,10,#1,False,True,45
+1,8,04:22,04:30,1707244247143.9275,1707244254443.0203,1707244168408.9065,7.2990927734375,ce-1-1,9,1,color,b-c-z-p,8,#1,9,8,#1,False,True,80
+1,7,04:39,04:30,1707244263541.51,1707244254443.0203,1707244261805.9988,-9.09848974609375,ce-2-1,10,2,color,b-c-z-p,8,#1,8,29,#1,False,False,52
+1,6,04:52,05:02,1707244276335.2146,1707244285611.622,1707244274929.7964,9.276407470703125,ce-3-1,11,3,color,b-c-z-p,6,#1,7,8,#1,False,True,66
+1,6,05:24,05:35,1707244308432.4214,1707244318795.46,1707244296135.713,10.36303857421875,ce-4-1,12,4,color,b-c-z-p,6,#1,7,12,#1,False,True,59
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,7,02:24,02:54,1707261001706.4407,1707261030046.5955,1707260984922.5325,28.34015478515625,ca-1-1,5,1,bar,b-c-z-p,7,#1,8,20,#1,False,True,64
+1,8,03:23,03:44,1707261061032.6785,1707261080969.5618,1707261043265.405,19.93688330078125,ca-2-1,6,2,bar,b-c-z-p,8,#1,9,11,#1,False,True,63
+1,7,04:05,04:51,1707261102297.4915,1707261148006.425,1707261092966.158,45.70893359375,ca-3-1,7,3,bar,b-c-z-p,7,#1,8,17,#1,False,True,96
+1,6,05:07,05:50,1707261164504.8406,1707261207654.0981,1707261158024.788,43.149257568359374,ca-4-1,8,4,bar,b-c-z-p,6,#1,7,10,#1,False,True,45
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,7,01:06,01:00,1707430043420.9258,1707430037297.7947,1707430037834.1409,-6.123131103515625,ca-1-1,5,1,bar,b-c-z-p,7,#1,8,20,#1,False,True,64
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,8,00:11,00:14,1707433565261.386,1707433568358.777,1707433564526.371,3.09739111328125,ca-9,1,1,bar,b-c-z-p,7,#1,9,1,#1,False,False,0
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,13,00:48,00:45,1707433745271.2573,1707433741836.6501,1707433743411.722,-3.434607177734375,m-9,4,1,plain,b-c-z-p,6,#1,14,1,#1,False,False,0
+1,8,01:00,00:56,1707433757095.2366,1707433752990.3005,1707433753916.6677,-4.10493603515625,ca-1-1,5,1,bar,b-c-z-p,7,#1,9,20,#1,False,False,64
+1,8,01:12,01:10,1707433769422.2444,1707433767085.9768,1707433767829.6753,-2.336267578125,ca-2-1,6,2,bar,b-c-z-p,8,#1,9,11,#1,False,True,63

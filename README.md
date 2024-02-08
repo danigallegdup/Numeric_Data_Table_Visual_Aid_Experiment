@@ -1,2 +1,2 @@
-# Numeric_Data_Table_Visual_Aid_Experiment
+# Numeric Data Table Visual Aid Experiment
 Experiment Researching The Effect of Visual Aids for Reading Data Tables

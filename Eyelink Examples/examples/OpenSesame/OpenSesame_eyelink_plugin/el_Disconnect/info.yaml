@@ -1,0 +1,10 @@
+category: "EyeLink"
+priority: 9
+version: 0.3
+author: Zhiguo Wang [@SR-Research]
+url: http://www.sr-research.com
+description: Disconnecting from the EyeLink tracker and retrieve the data file.
+controls:
+  - type: text
+    label: "<b>Close the link and retrieve the data file</b> <br /><br />This node will help to close the link to the tracker and retrieve the data from the Host PC."
+    name: text_el_close_link

@@ -283,7 +283,7 @@ def save_file(file: dict) -> None:
     """
     global header, is_error
     print(str(True))
-    file_handle = open(file_path + "/result.csv", 'a')
+    file_handle = open("Results/1/result.csv", 'a')
     if(header == False):
         file_handle.write('participant ID'+','+'P_answer'+','+'start time'+','+'end time'+','+'start time_e'+','+'end time_e'+','+'start time_t'+','+'time spent'+','+'Task ID'+','+'trial'+','+'Repetition'+','+'Condition'+','+'Order of table'+','+'Correct Answer'+','+'col'+','+'row'+','+'Answer row'+','+'Answer column'+','+'error'+','+'isPerfect'+','+'ans_value'+'\n')
   
@@ -333,7 +333,7 @@ def save_mouse()-> None:
             pyautogui.press("space")
                 
         start_mouse -=1
-        file_handle = open(file_path+'/'+'mouse/'+test_l[list_number-1][mn]+'-'+str(date.today())+'-'+str(start_time_e)+'.csv','a')
+        file_handle = open('Results/1/mouse/'+test_l[list_number-1][mn]+'-'+str(date.today())+'-'+str(start_time_e)+'.csv','a')
         if header_m == False:
             file_handle.write('trial'+','+'timestamp'+','+'x'+','+'y'+'\n')
         file_handle.write(str(test_l[list_number-1][mn])+','+str((time())*1000)+','+str(pyautogui.position().x)+','+str(pyautogui.position().y)+'\n')
@@ -535,7 +535,7 @@ file_path = input("Enter participant's ID number: ")
 Read task data from a CSV file named after the participant's number.
 Initialize the main window (top) of the application and set it to fullscreen.
 """  
-test_l = read_csv(file_path+'/'+file_path + 'input.csv')
+test_l = read_csv("Results/1/1input.csv")
 top = Tk()
 print(test_l)
 top.attributes("-fullscreen", True)
