@@ -18,8 +18,6 @@ python test.py
 prompted for the participants ID number
 id # 1
 
-
-
 - Python: Python 3.x is required.
 - Libraries: Tkinter for the GUI, PIL for image handling, and pyautogui for automating GUI interactions.
 - Running: Execute the script in a Python environment. Ensure all dependent libraries are installed.
@@ -56,7 +54,7 @@ References for Debugging:
 ------------------------------------------------------------------------------------------
 """
 
-
+import EyeTrackerHandler
 import time
 from tkinter import *
 from PIL import Image, ImageTk
@@ -205,8 +203,9 @@ def insert_table_data_into_tree_view(table_path: str, head_list: list) -> None:
             colum10 = row[head_list[9]]
             colum11 = row[head_list[10]]
             colum12 = row[head_list[11]]
+            colum13 = row[head_list[12]]
 
-            tree.insert("", i, iid=i+1, values=(colum1,colum2,colum3,colum4,colum5,colum6,colum7,colum8,colum9,colum10,colum11,colum12))
+            tree.insert("", i, iid=i+1, values=(colum1,colum2,colum3,colum4,colum5,colum6,colum7,colum8,colum9,colum10,colum11,colum12,colum13))
             i = i+1
         print(count)
     print(head_list)
@@ -499,6 +498,8 @@ def selectItem(event) -> None:
         cell_value = curItem['values'][10]
     elif col == '#12':
         cell_value = curItem['values'][11]
+    elif col == '#13':
+        cell_value = curItem['values'][12]
         
     print('row:', curItem['values'])
     print ('cell_value = ', cell_value)
