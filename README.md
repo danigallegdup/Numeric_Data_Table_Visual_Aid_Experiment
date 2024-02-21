@@ -18,22 +18,22 @@ This research experiemnt explores the effectiveness of using visual aids to unde
 From the list of tasks that were shortlisted and the table generating process that was covered last week. Here is a demo to figure all the tasks to help narrow down and finalize the experiment.
 
 - Full document can be found here: 
-[Click here to view the PDF](./ShortListed_Tasks.md)
+[Click here to view full list](./ShortListed_Tasks.md)
 
 ### Task 1: Filter
-- **Count the number of entries in the Y Column that exceed a value of X.**
+- **In the Members column, count how many entries exceed the value of 38**
 
 ### Task 2: Correlate
 - **Determine which column amongst X, Y, and Z is positively correlated with Column A.**
 
 ### Task 3: Sort
-- **Name the rows that are in the top 5 values in Column X in ascending order.**
+- **In the Members column, name the animes with the highest five values in ascending order.**
 
-### Task 4: Calculate
-- **Calculate an estimation of the average value of entries in Column X.**
+### Task 4: Calculate Derived Value
+- **In the Members column, calculate a rough estimate of the average value**
 
 ### Task 5: Retrieve Value
-- **Find the anime with a value equal to X in the Y column.**
+- **In the Members column, find the anime with a value equal to 31**
 
 ## Running the Experiment
 
