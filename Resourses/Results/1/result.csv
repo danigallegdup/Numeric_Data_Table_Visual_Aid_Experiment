@@ -1,0 +1,32 @@
+
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,0,01:30,01:31,1710361678258.4583,1710361679163.9875,1710361677257.3555,0.905529296875,ce-9,2,1,color,b-c-z-p,0,#1,1,1,#1,False,True,0
+1,0,01:40,01:31,1710361687610.9656,1710361679163.9875,1710361684479.1748,-8.44697802734375,a-9,3,1,zebra,b-c-z-p,0,#1,1,1,#1,False,True,0
+1,0,01:56,01:45,1710361703807.5247,1710361693285.5242,1710361700476.9543,-10.52200048828125,m-9,4,1,plain,b-c-z-p,0,#1,1,1,#1,False,True,0
+1,7,02:11,02:02,1710361718973.3225,1710361709645.6577,1710361711234.2397,-9.327664794921875,ca-1-1,5,1,bar,b-c-z-p,7,#1,8,20,#1,False,True,64
+1,7,02:11,02:18,1710361718973.3225,1710361725469.0752,1710361711234.2397,6.495752685546875,ca-1-1,5,1,bar,b-c-z-p,7,#1,8,20,#1,False,True,64
+1,6,02:28,02:31,1710361735808.8325,1710361739161.7869,1710361732290.009,3.352954345703125,ca-2-1,6,2,bar,b-c-z-p,6,#1,7,11,#1,False,True,63
+1,5,02:38,02:41,1710361746408.7227,1710361749066.1912,1710361744724.3958,2.657468505859375,ca-3-1,7,3,bar,b-c-z-p,5,#1,6,17,#1,False,True,96
+1,8,02:48,02:54,1710361756531.8284,1710361761824.499,1710361754951.8745,5.292670654296875,ca-4-1,8,4,bar,b-c-z-p,8,#1,9,10,#1,False,True,45
+1,8,03:09,03:19,1710361777321.075,1710361786669.9333,1710361767413.689,9.3488583984375,ce-1-1,9,1,color,b-c-z-p,8,#1,9,8,#1,False,True,80
+1,5,03:33,03:41,1710361801722.7976,1710361809181.7449,1710361791967.8538,7.458947265625,ce-2-1,10,2,color,b-c-z-p,5,#1,6,29,#1,False,True,52
+1,6,03:49,03:55,1710361817727.8914,1710361822969.488,1710361815884.6829,5.2415966796875,ce-3-1,11,3,color,b-c-z-p,6,#1,7,8,#1,False,True,66
+1,7,04:14,04:20,1710361842300.1797,1710361848293.4148,1710361832591.3938,5.993235107421875,ce-4-1,12,4,color,b-c-z-p,7,#1,8,12,#1,False,True,59
+1,,04:29,04:38,1710361857129.6099,1710361866093.1038,1710361854229.9788,8.963493896484374,a-1-1,13,1,zebra,b-c-z-p,5,#0,6,25,#1,False,False,73
+1,8,04:45,05:11,1710361873894.3228,1710361899632.2502,1710361872673.2854,25.737927490234377,a-2-1,14,2,zebra,b-c-z-p,8,#1,9,6,#1,False,True,89
+1,7,05:21,05:35,1710361909895.8013,1710361923910.6133,1710361906885.7397,14.01481201171875,a-3-1,15,3,zebra,b-c-z-p,7,#1,8,5,#1,False,True,98
+1,6,05:44,05:53,1710361933025.713,1710361941705.4128,1710361930741.5483,8.679699951171875,a-4-1,16,4,zebra,b-c-z-p,6,#1,7,27,#1,False,True,69
+1,,06:04,05:53,1710361952349.06,1710361941705.4128,1710361946344.1484,-10.643647216796875,m-1-1,17,7,plain,b-c-z-p,5,#0,6,12,#1,False,False,55
+1,8,06:36,06:29,1710361984952.9163,1710361977805.4326,1710361981659.898,-7.147483642578125,m-2-1,18,6,plain,b-c-z-p,8,#1,9,21,#1,False,True,65
+1,7,08:11,08:07,1710362080237.0522,1710362075838.7217,1710362076434.29,-4.39833056640625,m-3-1,19,7,plain,b-c-z-p,7,#1,8,19,#1,False,True,64
+1,6,08:27,08:19,1710362095207.3313,1710362086753.624,1710362087442.2139,-8.453707275390625,m-4-1,20,8,plain,b-c-z-p,6,#1,7,16,#1,False,True,59
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,7,07:16,03:14,1710366140527.6106,1710365898163.594,1710366051368.9216,-242.3640166015625,ca-1-1,5,1,bar,b-c-z-p,7,#1,8,20,#1,False,True,64
+1,Nougat,07:16,03:14,1710366140527.6106,1710365898163.594,1710366051368.9216,-242.3640166015625,ca-1-1,5,1,bar,b-c-z-p,7,#7,1,20,#1,False,False,64
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,8,00:45,00:44,1710717707472.2546,1710717706105.5396,1710717706620.799,-1.366715087890625,m-9,4,1,plain,b-c-z-p,0,#1,9,1,#1,False,False,0
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+participant ID,P_answer,start time,end time,start time_e,end time_e,start time_t,time spent,Task ID,trial,Repetition,Condition,Order of table,Correct Answer,col,row,Answer row,Answer column,error,isPerfect,ans_value
+1,20,00:16,00:15,1710717875713.6787,1710717874770.8022,1710717875163.4966,-0.94287646484375,a-9,3,1,zebra,b-c-z-p,0,#3,23,1,#1,False,False,0

@@ -1,0 +1,232 @@
+Task,table path,table,task ID,type of task,repetation,Condition,Order,C_answer,Participant ID,c_answer_row,c_answer_col,end,text,ans_value,mouse_file
+"When you are done reading these instructions, you will see a data table. Please carefully look at the table and explore it. 
+
+Filter Task:  count how many values are over a given number: for instance: ",Experiment Data\new_tables\DataSet1_anime_color.png,Experiment Data\candy.csv,ca-9,Value Threshold Analysis,1,bar,b-c-z-p,0,1,1,#1,TRUE,"You have finished one condition for the task.
+
+",0,1
+"When you are done reading these instructions, you will see a data table. Please carefully look at the table and explore it. 
+
+Calcuate Derived Value: estimations of the average value in a column",Experiment Data\new_tables\DataSet5_cereal_zebra.png,Experiment Data\cereal.csv,ce-9,Value Threshold Analysis,1,color,b-c-z-p,0,1,1,#1,TRUE,"You have finished one condition for the task.
+",0,2
+"When you are done reading these instructions, you will see a data table. Please carefully look at the table and explore it. 
+
+Retrieve Value: ",Experiment Data\new_tables\DataSet9_candy_plain.png,Experiment Data\anime.csv,a-9,Value Threshold Analysis,1,zebra,b-c-z-p,0,1,1,#1,TRUE,"You have finished one condition for the task.
+",0,3
+"When you are done reading these instructions, you will see a data table. Please carefully look at the table and explore it. 
+
+Correlation Task: Find postive correations",Experiment Data\new_tables\DataSet13_movie_bar.png,Experiment Data\movie.csv,m-9,Value Threshold Analysis,1,plain,b-c-z-p,0,1,1,#1,TRUE,"Ready to start the Experiment? Let's do this!!
+",0,4
+"In the Watching column, count how many entries exceed the value of 80 
+
+Press space as soon as you have found the answer and say the number out loud.  ",Experiment Data\new_tables\DataSet1_anime_color.png,Experiment Data\candy.csv,ca-1-1,Value Threshold Analysis,1,bar,b-c-z-p,7,1,20,#1,,,64,5
+"In the Popularity column, count how many entries exceed the value of 70 
+
+Press space as soon as you have found the answer and say the number out loud.",Experiment Data\new_tables\DataSet2_anime_color.png,Experiment Data\candy.csv,ca-2-1,Value Threshold Analysis,2,bar,b-c-z-p,6,1,11,#1,,,63,6
+"In the Watching column, count how many entries exceed the value of 88 
+
+Press space as soon as you have found the answer and say the number out loud. ",Experiment Data\new_tables\DataSet3_anime_color.png,Experiment Data\candy.csv,ca-3-1,Value Threshold Analysis,3,bar,b-c-z-p,5,1,17,#1,,,96,7
+"In the Members column, count how many entries exceed the value of 43
+
+Press space as soon as you have found the answer and say the number out loud. ",Experiment Data\new_tables\DataSet4_anime_color.png,Experiment Data\candy.csv,ca-4-1,Value Threshold Analysis,4,bar,b-c-z-p,8,1,10,#1,TRUE,"You have finished one condition for the task.
+",45,8
+"In the Sodium column, count how many entries exceed the value of 57  
+
+Press space as soon as you have found the answer, and say the number out loud.  ",Experiment Data\new_tables\DataSet5_cereal_zebra.png,Experiment Data\cereal.csv,ce-1-1,Value Threshold Analysis,1,color,b-c-z-p,8,1,8,#1,,,80,9
+"In the Score column, count how many entries exceed the value of 70 
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet6_cereal_zebra.png,Experiment Data\cereal.csv,ce-2-1,Value Threshold Analysis,2,color,b-c-z-p,5,1,29,#1,,,52,10
+"In the Carbo column, count how many entries exceed the value of 45 
+
+Press space as soon as you have found the answer, and say the number out loud. ",Experiment Data\new_tables\DataSet7_cereal_zebra.png,Experiment Data\cereal.csv,ce-3-1,Value Threshold Analysis,3,color,b-c-z-p,6,1,8,#1,,,66,11
+"In the Sodium column, count how many entries exceed the value of 60  
+
+Press space as soon as you have found the answer, and say the number out loud. ",Experiment Data\new_tables\DataSet8_cereal_zebra.png,Experiment Data\cereal.csv,ce-4-1,Value Threshold Analysis,4,color,b-c-z-p,7,1,12,#1,TRUE,"You have finished one condition for the task.
+",59,12
+"In the Fruity column, count how many entries exceed the value of 66  
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet9_candy_plain.png,Experiment Data\anime.csv,a-1-1,Value Threshold Analysis,1,zebra,b-c-z-p,5,1,25,#1,,,73,13
+"In the Rating column, count how many entries exceed the value of 38  
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet10_candy_plain.png,Experiment Data\anime.csv,a-2-1,Value Threshold Analysis,2,zebra,b-c-z-p,8,1,6,#1,,,89,14
+"In the Pluribus column, count how many entries exceed the value of 50 
+
+Press space as soon as you have found the answer, and say the number out loud. ",Experiment Data\new_tables\DataSet11_candy_plain.png,Experiment Data\anime.csv,a-3-1,Value Threshold Analysis,3,zebra,b-c-z-p,7,1,5,#1,,,98,15
+"In the Nougat column, count how many entries exceed the value of 57 
+
+Press space as soon as you have found the answer, and say the number out loud. ",Experiment Data\new_tables\DataSet12_candy_plain.png,Experiment Data\anime.csv,a-4-1,Value Threshold Analysis,4,zebra,b-c-z-p,6,1,27,#1,TRUE,"You have finished one condition for the task.
+",69,16
+"In the Fandango column, count how many entries exceed the value of 70 
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet13_movie_bar.png,Experiment Data\movie.csv,m-1-1,Value Threshold Analysis,7,plain,b-c-z-p,5,1,12,#1,,,55,17
+"In the Hulu column, count how many entries exceed the value of 76 
+
+Press space as soon as you have found the answer, and say the number out loud.  ",Experiment Data\new_tables\DataSet14_movie_bar.png,Experiment Data\movie.csv,m-2-1,Value Threshold Analysis,6,plain,b-c-z-p,8,1,21,#1,,,65,18
+"In the PluggedIn column, count how many entries exceed the value of 54 
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet15_movie_bar.png,Experiment Data\movie.csv,m-3-1,Value Threshold Analysis,7,plain,b-c-z-p,7,1,19,#1,,,64,19
+"In the Netflix column, count how many entries exceed the value of 57
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet16_movie_bar.png,Experiment Data\movie.csv,m-4-1,Value Threshold Analysis,8,plain,b-c-z-p,6,1,16,#1,TRUE,"You have finished one type of task. Please take the survey that experimenter will hand it to you.
+You might want to take a short break and wait for experimenters response.
+
+",59,20
+"Determine which of the last 5 columns are positively correlated with the column named Episodes 
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet1_anime_color.png,Experiment Data\candy.csv,ca-1-2,finding maximum horizontal,1,bar,b-c-z-p,Completed,1,1,#7,,,53,21
+"Determine which of the last 5 columns are positively correlated with the column named Plan to Watch
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet2_anime_color.png,Experiment Data\candy.csv,ca-2-2,finding maximum horizontal,2,bar,b-c-z-p,Favorites,1,1,#11,,,48,22
+"Determine which of the last 5 columns are positively correlated with the column named Completed
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet3_anime_color.png,Experiment Data\candy.csv,ca-3-2,finding maximum horizontal,3,bar,b-c-z-p,Episodes,1,1,#7,,,53,23
+"Determine which of the last 5 columns are positively correlated with the column named Score
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet4_anime_color.png,Experiment Data\candy.csv,ca-4-2,finding maximum horizontal,4,bar,b-c-z-p,Dropped,1,1,#5,TRUE,"You have finished one condition for the task.
+",38,24
+"Determine which of the last 5 columns are positively correlated with the column named Potassium 
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white.",Experiment Data\new_tables\DataSet5_cereal_zebra.png,Experiment Data\cereal.csv,ce-1-2,finding maximum horizontal,1,color,b-c-z-p,Sugars,1,1,#8,,,53,25
+"Determine which of the last 5 columns are positively correlated with the column named Calories
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet6_cereal_zebra.png,Experiment Data\cereal.csv,ce-2-2,finding maximum horizontal,2,color,b-c-z-p,Protein,1,1,#4,,,92,26
+"Determine which of the last 5 columns are positively correlated with the column named Iron
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white.",Experiment Data\new_tables\DataSet7_cereal_zebra.png,Experiment Data\cereal.csv,ce-3-2,finding maximum horizontal,3,color,b-c-z-p,Carbo,1,1,#2,,,47,27
+"Determine which of the last 5 columns are positively correlated with the column named Vitamins 
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet8_cereal_zebra.png,Experiment Data\cereal.csv,ce-4-2,finding maximum horizontal,4,color,b-c-z-p,Potassium,1,1,#8,TRUE,"You have finished one condition for the task.
+",59,28
+"Determine which of the last 5 columns are positively correlated with the column named Hard
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white.",Experiment Data\new_tables\DataSet9_candy_plain.png,Experiment Data\anime.csv,a-1-2,finding maximum horizontal,1,zebra,b-c-z-p,Chocolate,1,1,#10,,,61,29
+"Determine which of the last 5 columns are positively correlated with the column named SugarPercent
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet10_candy_plain.png,Experiment Data\anime.csv,a-2-2,finding maximum horizontal,2,zebra,b-c-z-p,Rating,1,1,#12,,,71,30
+"Determine which of the last 5 columns are positively correlated with the column named Rating
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet11_candy_plain.png,Experiment Data\anime.csv,a-3-2,finding maximum horizontal,3,zebra,b-c-z-p,Chocolate,1,1,#7,,,69,31
+"Determine which of the last 5 columns are positively correlated with the column named Hard
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet12_candy_plain.png,Experiment Data\anime.csv,a-4-2,finding maximum horizontal,4,zebra,b-c-z-p,Nougat,1,1,#11,TRUE,"You have finished one condition for the task.
+",71,32
+"Determine which of the last 5 columns are positively correlated with the column named Naver
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet13_movie_bar.png,Experiment Data\movie.csv,m-1-2,finding maximum horizontal,1,plain,b-c-z-p,Roger Ebert,1,1,#2,,,99,33
+"Determine which of the last 5 columns are positively correlated with the column named MrQE
+
+Press space as soon as you have found the answer, and say the attribute out loud once the screen becomes white.",Experiment Data\new_tables\DataSet14_movie_bar.png,Experiment Data\movie.csv,m-2-2,finding maximum horizontal,2,plain,b-c-z-p,Netflix,1,1,#5,,,68,34
+"Determine which of the last 5 columns are positively correlated with the column named RottenTomatoes
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet15_movie_bar.png,Experiment Data\movie.csv,m-3-2,finding maximum horizontal,3,plain,b-c-z-p,Netflix,1,1,#7,,,65,35
+"Determine which of the last 5 columns are positively correlated with the column named IMDB
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet16_movie_bar.png,Experiment Data\movie.csv,m-4-2,finding maximum horizontal,4,plain,b-c-z-p,Fandango,1,1,#4,TRUE,"You have finished one type of task. Please take the survey that experimenter will hand it to you.
+You might want to take a short break and wait for experimenters response.
+
+",67,36
+"In the Score column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet1_anime_color.png,Experiment Data\candy.csv,ca-1-3,finding value,1,bar,b-c-z-p,28.89,1,11,#8,,,24,37
+"In the Episodes column, calculate a rough estimate of the average value 
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white.",Experiment Data\new_tables\DataSet2_anime_color.png,Experiment Data\candy.csv,ca-2-3,finding value,2,bar,b-c-z-p,62.37,1,7,#6,,,17,38
+"In the Members column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet3_anime_color.png,Experiment Data\candy.csv,ca-3-3,finding value,3,bar,b-c-z-p,37.86,1,17,#10,,,20,39
+"In the Favorites column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white",Experiment Data\new_tables\DataSet4_anime_color.png,Experiment Data\candy.csv,ca-4-3,finding value,4,bar,b-c-z-p,47.65,1,8,#7,TRUE,"You have finished one condition for the task.
+",58,40
+"In the Fiber column, calculate a rough estimate of the average value 
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet5_cereal_zebra.png,Experiment Data\cereal.csv,ce-1-3,finding value,1,color,b-c-z-p,56.93,1,11,#8,,,21,41
+"In the Carbo column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet6_cereal_zebra.png,Experiment Data\cereal.csv,ce-2-3,finding value,2,color,b-c-z-p,42.1,1,7,#6,,,40,42
+"In the Sugars column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet7_cereal_zebra.png,Experiment Data\cereal.csv,ce-3-3,finding value,3,color,b-c-z-p,35.62,1,17,#10,,,13,43
+"In the Score column, calculate a rough estimate of the average value 
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet8_cereal_zebra.png,Experiment Data\cereal.csv,ce-4-3,finding value,4,color,b-c-z-p,52.31,1,8,#7,TRUE,"You have finished one condition for the task.
+",43,44
+"In the Caramel column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet9_candy_plain.png,Experiment Data\anime.csv,a-1-3,finding value,1,zebra,b-c-z-p,37.86,1,11,#8,,,47,45
+"In the Almond column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white.",Experiment Data\new_tables\DataSet10_candy_plain.png,Experiment Data\anime.csv,a-2-3,finding value,2,zebra,b-c-z-p,35.62,1,7,#6,,,12,46
+"In the Caramel column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white.",Experiment Data\new_tables\DataSet11_candy_plain.png,Experiment Data\anime.csv,a-3-3,finding value,3,zebra,b-c-z-p,50.24,1,17,#10,,,50,47
+"In the Fruity column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white.",Experiment Data\new_tables\DataSet12_candy_plain.png,Experiment Data\anime.csv,a-4-3,finding value,4,zebra,b-c-z-p,37.86,1,8,#7,TRUE,"You have finished one condition for the task.
+",40,48
+"In the Metacritic column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet13_movie_bar.png,Experiment Data\movie.csv,m-1-3,finding value,1,plain,b-c-z-p,52.31,1,11,#8,,,34,49
+"In the Fandango column, calculate a rough estimate of the average value
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white.",Experiment Data\new_tables\DataSet14_movie_bar.png,Experiment Data\movie.csv,m-2-3,finding value,2,plain,b-c-z-p,37.86,1,7,#6,,,63,50
+"In the Metacritic column, calculate a rough estimate of the average value 
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white.",Experiment Data\new_tables\DataSet15_movie_bar.png,Experiment Data\movie.csv,m-3-3,finding value,3,plain,b-c-z-p,50.26,1,17,#10,,,26,51
+"In the Hulu column, calculate a rough estimate of the average value 
+
+Press space as soon as you have found the answer, and say the value out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet16_movie_bar.png,Experiment Data\movie.csv,m-4-3,finding value,4,plain,b-c-z-p,52.31,1,8,#7,TRUE,"You have finished one type of task. Please take the survey that experimenter will hand it to you.
+You might want to take a short break and wait for experimenters response.
+
+
+",47,52
+"In the Members column, find the anime with a value equal to 15. 
+
+Press space as soon as you have found the answer and say the number out loud.",Experiment Data\new_tables\DataSet1_anime_color.png,Experiment Data\candy.csv,ca-1-4,finding proportinal difference,1,bar,b-c-z-p,Metal Panic,1,1,#12,,,Price,53
+"In the Ranked column, find the anime with a value equal to 26.
+
+Press space as soon as you have found the answer, and say the name of the Candys out loud once the screen becomes white.",Experiment Data\new_tables\DataSet2_anime_color.png,Experiment Data\candy.csv,ca-2-4,finding proportinal difference,2,bar,b-c-z-p,Monster Hunter,1,1,#11,,,Rating,54
+"In the Dropped column, find the anime with a value equal to 17.  
+
+Press space as soon as you have found the answer and say the number out loud. ",Experiment Data\new_tables\DataSet3_anime_color.png,Experiment Data\candy.csv,ca-3-4,finding proportinal difference,3,bar,b-c-z-p,Megical Warfare,1,1,#11,,,Rating,55
+"In the Dropped column, find the anime with a value equal to 12. 
+
+Press space as soon as you have found the answer and say the number out loud.",Experiment Data\new_tables\DataSet4_anime_color.png,Experiment Data\candy.csv,ca-4-4,finding proportinal difference,4,bar,b-c-z-p,Metal Panic,1,1,#10,TRUE,"You have finished one condition for the task.
+",SugarPercent,56
+"In the Sugars column, find the anime with a value equal to 51. 
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet5_cereal_zebra.png,Experiment Data\cereal.csv,ce-1-4,finding proportinal difference,1,color,b-c-z-p,Wonderful Chex,1,1,#10,,,Score,57
+"In the Score column, find the anime with a value equal to 32.  
+
+Press space as soon as you have found the answer, and say the name of the cereals out loud once the screen becomes white. ",Experiment Data\new_tables\DataSet6_cereal_zebra.png,Experiment Data\cereal.csv,ce-2-4,finding proportinal difference,2,color,b-c-z-p,Wheat Cream,1,1,#9,,,Potassium,58
+"In the Protein column, find the anime with a value equal to 83. 
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet7_cereal_zebra.png,Experiment Data\cereal.csv,ce-3-4,finding proportinal difference,3,color,b-c-z-p,Lucky Charms,1,1,#11,,,Iron,59
+"In the Sodium column, find the anime with a value equal to 26.  
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet8_cereal_zebra.png,Experiment Data\cereal.csv,ce-4-4,finding proportinal difference,4,color,b-c-z-p,Wheat Cream,1,1,#12,TRUE,"You have finished one condition for the task.
+",Vitamins,60
+"In the Bar column, find the anime with a value equal to 32.  
+
+Press space as soon as you have found the answer, and say the name of the Animes out loud once the screen becomes white.",Experiment Data\new_tables\DataSet9_candy_plain.png,Experiment Data\anime.csv,a-1-4,finding proportinal difference,1,zebra,b-c-z-p,Fun Dips,1,1,#9,,,Completed,61
+"In the Chocolate column, find the anime with a value equal to 68. 
+
+Press space as soon as you have found the answer, and say the name of the Animes out loud once the screen becomes white.",Experiment Data\new_tables\DataSet10_candy_plain.png,Experiment Data\anime.csv,a-2-4,finding proportinal difference,2,zebra,b-c-z-p,Root Barrels,1,1,#10,,,On-Hold,62
+"In the Almond column, find the anime with a value equal to 26.  
+
+Press space as soon as you have found the answer, and say the number out loud. ",Experiment Data\new_tables\DataSet11_candy_plain.png,Experiment Data\anime.csv,a-3-4,finding proportinal difference,3,zebra,b-c-z-p,Reese Pieces,1,1,#12,,,Plan to Watch,63
+"In the Caramel column, find the anime with a value equal to 15. 
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet12_candy_plain.png,Experiment Data\anime.csv,a-4-4,finding proportinal difference,4,zebra,b-c-z-p,Fruit Chews,1,1,#11,TRUE,"You have finished one condition for the task.
+",Dropped,64
+"In the IMDB column, find the anime with a value equal to 67. 
+
+Press space as soon as you have found the answer, and say the number out loud. ",Experiment Data\new_tables\DataSet13_movie_bar.png,Experiment Data\movie.csv,m-1-4,finding proportinal difference,1,plain,b-c-z-p,South Paw,1,1,#9,,,Roger Ebert,65
+"In the Hulu column, find the anime with a value equal to 79.  
+
+Press space as soon as you have found the answer, and say the name of the films out loud once the screen becomes white.",Experiment Data\new_tables\DataSet14_movie_bar.png,Experiment Data\movie.csv,m-2-4,finding proportinal difference,2,plain,b-c-z-p,Saint Laurent,1,1,#12,,,Fandango,66
+"In the Naver column, find the anime with a value equal to 73. 
+
+Press space as soon as you have found the answer, and say the number out loud.",Experiment Data\new_tables\DataSet15_movie_bar.png,Experiment Data\movie.csv,m-3-4,finding proportinal difference,3,plain,b-c-z-p,End Tour,1,1,#10,,,PluggedIn,67
+"In the Film Comment column, find the anime with a value equal to 31.  
+
+Press space as soon as you have found the answer, and say the number out loud. ",Experiment Data\new_tables\DataSet16_movie_bar.png,Experiment Data\movie.csv,m-4-4,finding proportinal difference,4,plain,b-c-z-p,Next Door,1,1,#11,TRUE,"You have finished the experiment, please ramain on the seat and wait for experimenter's response.",Naver,68

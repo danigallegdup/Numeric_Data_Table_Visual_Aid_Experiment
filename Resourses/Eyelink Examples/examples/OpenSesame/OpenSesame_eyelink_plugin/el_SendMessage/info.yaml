@@ -1,0 +1,15 @@
+category: "EyeLink"
+priority: 9
+version: 0.3
+author: Zhiguo Wang [@SR-Research]
+url: http://www.sr-research.com
+description: Send command(s) to the tracker
+controls:
+  - type: editor
+    var: el_message_to_send
+    label: Message List
+    name: editor_el_message_to_send
+    syntax: false
+  - type: text
+    label: <b>Messages are IMPORTANT</b> and we need messages in the data file to tell what event happened during a trial <br/>and at what time. Messages should be sent to the tracker everytime a stimulus screen is on or a response has <br/>been issued. You need also to send formatted messages if you plan to use Data Viewer for data analysis and visualization.
+    name: text_el_message

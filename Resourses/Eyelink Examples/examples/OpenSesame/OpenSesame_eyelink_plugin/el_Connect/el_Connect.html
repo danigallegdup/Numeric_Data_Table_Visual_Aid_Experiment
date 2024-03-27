@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.0.4.2 (Windows)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2018-07-18T15:16:18.597000000"/>
+	<style type="text/css">
+		@page { margin-left: 2.54cm; margin-right: 2.54cm; margin-bottom: 2.54cm }
+		p { margin-bottom: 0.25cm; line-height: 120% }
+		h1 { margin-top: 0.71cm; margin-bottom: 0.21cm; direction: ltr; line-height: 100%; text-align: left; page-break-inside: avoid; orphans: 2; widows: 2 }
+		h1.western { font-family: "Arial", serif; font-size: 20pt; font-weight: normal }
+		h1.cjk { font-size: 20pt; font-weight: normal }
+		h1.ctl { font-size: 20pt; font-weight: normal }
+		h2 { margin-top: 0.64cm; direction: ltr; line-height: 100%; text-align: left; page-break-inside: avoid; orphans: 2; widows: 2 }
+		h2.western { font-family: "Arial", serif; font-size: 16pt; font-weight: normal }
+		h2.cjk { font-family: "Arial"; font-size: 16pt; font-weight: normal }
+		h2.ctl { font-family: "Arial"; font-size: 16pt; font-weight: normal }
+		h4 { margin-top: 0.49cm; margin-bottom: 0.14cm; direction: ltr; color: #666666; line-height: 100%; text-align: left; page-break-inside: avoid; orphans: 2; widows: 2 }
+		h4.western { font-family: "Arial", serif; font-weight: normal }
+		h4.cjk { font-family: "Arial"; font-weight: normal }
+		h4.ctl { font-family: "Arial"; font-weight: normal }
+		a:link { so-language: zxx }
+	</style>
+</head>
+<body lang="en" dir="ltr">
+<div title="header">
+	<p style="margin-bottom: 2.44cm; line-height: 115%"><br/>
+
+	</p>
+</div>
+<h1 class="western"><a name="_f74w5zx05w1k"></a>1 Installation</h1>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">This
+plugin should also work on Linux and Mac, but we have only tested it
+on the Windows platform. The installation instructions presented
+below are for the Windows platform.</font></p>
+<p style="margin-bottom: 0cm; line-height: 115%"><br/>
+
+</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Download
+	the latest version of the Plugin from the SR Support website, under
+	the Getting Started with Experimental Programming section.</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Unzip
+	the downloaded .zip file and copy all the folders contained in the
+	.zip file to C:\Program Files
+	(x86)\OpenSesame\share\opensesame_plugins\</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Download
+	and install the latest version of the EyeLink Developer&rsquo;s Kit
+	from the SR Support website, from the Downloads-&gt;Eyelink Display
+	Software section.
+	</font><a href="https://www.sr-support.com/forum/downloads/eyelink-display-software/39-eyelink-developers-kit-for-windows-windows-display-software"><font color="#1155cc"><font size="3" style="font-size: 12pt"><u>https://www.sr-support.com/forum/downloads/eyelink-display-software/39-eyelink-developers-kit-for-windows-windows-display-software</u></font></font></a></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">OpenSesame
+	needs the Pylink library to communicate with the tracker. Pylink is
+	a Python wrapper of the EyeLink API (part of the Developer&rsquo;s
+	Kit) and one can find this library from C:\Program Files (x86)\SR
+	Research\EyeLink\SampleExperiments\Python. There are multiple
+	versions, with the last two digits in the folder name corresponding
+	to the Python version it was built against (i.e., pylink27 is for
+	the Python 2.7 series). Please rename the correct version of pylink
+	folder to &ldquo;pylink&rdquo; and copy it to C:\Program Files
+	(x86)\OpenSesame\Lib\site-packages. </font>
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">After
+	the above steps, please be sure to set the IP address of the
+	experimental PC to &ldquo;100.1.1.2&rdquo; (without quotes) and
+	Subnet mask to &ldquo;255.255.255.0&rdquo; (without quotes) so the
+	experimental PC is on the same network as the EyeLink Host PC. Open
+	the example experiment that comes with the EyeLink plugin to test
+	the link between the two machines.  </font>
+	</p>
+</ol>
+<p style="margin-bottom: 0cm; line-height: 115%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">OpenSesame
+supports Pygame (legacy), Psychopy, and Expyriment as its backend. We
+have found the Expyriment backend is crash-prone and would encourage
+users to stick to the Psychopy backend, which is robust and supports
+frequently used visual stimuli for visual psychophysics (e.g.,
+gratings).</font></p>
+<p style="margin-bottom: 0cm; line-height: 115%"><br/>
+
+</p>
+<h1 class="western"><a name="_5dpkptlgd4aa"></a>2 Usage of the Plugin</h1>
+<p style="margin-bottom: 0cm; line-height: 115%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">After
+the Plugin has been installed, one should see eight items come up in
+the item toolbar of the OpenSesame interface. To use the plugin,
+simply drag one of these items to the required location in the
+experiment sequence. For general cognitive tasks, we recommend that
+users follow these integration steps:</font></p>
+<ol>
+	<li/>
+<h4 class="western"><a name="_tmcz3t6vyqjv"></a><b>Experiment
+	level</b></h4>
+	<ol type="a">
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Connect
+		to the tracker when the script initializes. Please use the
+		el_Connect item for this task. The configuration options available
+		for this item will be elaborated in the next section.</font></p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Calibrate
+		the tracker at the beginning of each block. This will help the user
+		to maintain optimal tracking accuracy. For fMRI or tasks in which
+		interruption of the task should be avoided, users can calibrate the
+		tracker once at the beginning of each run/session. The item for
+		this function is el_CamSetup. This item will help users to transfer
+		the camera image to the experimental PC, to adjust the pupil/CR
+		threshold by using hot keys on the experimental PC keyboard, to
+		calibrate the tracker and validate the calibration results. </font>
+		</p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Run
+		the experimental trials one-by-one and record eye movement data.</font></p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Disconnect
+		from the Eyelink Host PC and transfer the data file to the
+		experimental PC.</font></p>
+	</ol>
+	<li/>
+<h4 class="western"><a name="_odb7mj2i1ah"></a><b>Trial level</b></h4>
+	<ol type="a">
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Drift-correction
+		or drift-check. This procedure will check the tracking accuracy and
+		give the user a chance to re-calibrate the tracker, if needed.</font></p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Send
+		commands/messages to the tracker to draw reference landmarks on the
+		Host PC screen (optional, use the el_Command or el_Message items).</font></p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Start
+		recording. We start and stop recording at the beginning and end of
+		each trial, so the inter-trial intervals won&rsquo;t be recorded;
+		this will reduce the size of the EDF data file. For EEG and tasks
+		where  continuous recording is preferred, please start recording at
+		the beginning of each run/session. The user also has the option to
+		send a &ldquo;recording status&rdquo; message to the tracker; this
+		message will be shown in the bottom-right corner of the Host PC
+		screen.</font></p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Draw
+		experimental graphics and send messages to the tracker to mark the
+		onset of these stimuli, and maybe also the interest areas that will
+		be used in data analysis. This is IMPORTANT, otherwise, there is no
+		way to tell when and what stimuli was presented from the eye
+		movement data file.</font></p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Collect
+		subject responses and send messages to the tracker.</font></p>
+		<li/>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Stop
+		recording and send all experimental variables to the tracker. These
+		variables will be accessible from the Data Viewer software, a nifty
+		data analysis and visualization tool developed by SR Research.</font></p>
+	</ol>
+</ol>
+<p style="margin-bottom: 0cm; line-height: 115%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">We
+have provided an example script with all the recommended usage of the
+tracker. The functions of each of the items in the plugin are briefly
+explained below.</font></p>
+<h2 class="western"><a name="_cq14g9yt6xv4"></a>2.1 el_Connect</h2>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">Establish
+a link to the EyeLink Host PC, configure the tracker, and
+automatically open a data file on the Host to record the eye movement
+data. </font>
+</p>
+<p style="margin-bottom: 0cm; line-height: 115%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 115%"><font size="3" style="font-size: 12pt">The
+options can be set with this item are explained in the table below.</font></p>
+<p style="margin-bottom: 0cm; line-height: 115%"><br/>
+
+</p>
+<table width="624" cellpadding="7" cellspacing="0">
+	<col width="145">
+	<col width="449">
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Tracker Address</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">The IP address of the
+			Eyelink Host PC. The default IP address of the Host PC is
+			100.1.1.1; the IP address of the experimental PC should be in the
+			same network of the Host PC, i.e., in the range of 100.1.1.2-255.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Tracker Version</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">The model of EyeLink
+			tracker being used for data collection, could be Eyelink I,
+			EyeLink II, EyeLink 1000, EyeLink 1000 Plus, or EyeLink Portable
+			DUO. Some configuration options may not be available for certain
+			models, e.g., sampling rate cannot be set from the EyeLink Plugin
+			for EyeLink I and II, and the Pupil-only tracking method is not
+			available in EyeLink 1000, 1000 Plus and Portable DUO.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Camera Mount</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">The mounting solution of
+			the EyeLink camera, i.e., Desktop, Tower, Arm, Long-range. </font>
+			</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Mount Usage</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Tracking in either Head
+			Stabilized or Remote (head free to move) mode. The remote mode is
+			unavailable for Tower and Long-range mounts. Tracking in remote
+			mode requires the use of a target sticker on the subject&rsquo;s
+			forehead.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Dummy Mode</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Run the tracker in
+			&ldquo;simulation&rdquo; mode, i.e., no physical connection to the
+			tracker is established. In Dummy Mode, the user should press F1 to
+			skip Camera setup/calibration, and the drift-correction/check
+			target will briefly flashes and then disappear (as not tracker is
+			physically connected to the experimental PC).</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Link Filter Level</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">The EyeLink trackers
+			utilizes a heuristic filtering algorithm for denoise purposes (see
+			Stampe, 1993). Each increase in filter level reduces noise by a
+			factor of 2 to 3 but introduces a 1-sample delay to the data
+			available over the link. The default option is set to STANDARD,
+			but user can turn off Link Filter if real time online access of
+			gaze data is critical.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">File Filter Level</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Same as above, but applies
+			to the data recorded in file.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Eye Event Data</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Set how velocity
+			information for saccade detection is to be computed. This option
+			is almost always set to GAZE. Please see the EyeLink user manual
+			(section 4) for details of various eye events (e.g., fixation,
+			saccade). </font>
+			</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Saccade Sensitivity</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Sensitivity of the Eyelink
+			online parse, see Section 4.3.9 of the user manual. For Eyelink II
+			and newer models, HIGH-velocity=22 deg/sec, acceleration=3200
+			deg/sec^2; NORMAL-velocity=30 deg/sec, acceleration=8000
+			deg/sec^2.&quot;</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Eye Tracking Mode</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Select the tracking
+			algorithm. EyeLink I operates in Pupil-only mode, while EyeLink II
+			operates in either Pupil-only or Pupil-CR mode. EyeLink 1000 and
+			newer models all operate in Pupil-CR mode. The Pupil-CR tracking
+			algorithm is resilient to small head movements (i.e., drift-free
+			to certain extent). This is why force drift-correcting the tracker
+			is not recommended for EyeLInk 1000 and newer models.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Pupil Detection</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Set the algorithm used to
+			detect the pupil center. This option only applies to EyeLink 1000
+			and newer models.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Sampling rate</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">The sampling rate of the
+			tracker.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Eye(s) to Track</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Set the eyes to track; can
+			be changed on the Host PC manually.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Pupil Size</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">Record the pupil size in
+			arbitrary units, AREA and DIAMETER measures are equivalent:
+			DIAMETER = 256*SQRT(AREA/PI). The pupil size recorded in the data
+			files is in arbitrary units; calibration during testing is
+			required if one needs to report pupil size in real world units
+			(i.e., mm). Please see this SR Support forum post for details,
+			https://www.sr-support.com/showthread.php?5021-Answers-to-EyeLink-Host-PC-and-Hardware-FAQ&amp;p=20283#post20283.</font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="145" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">EDF Folder</font></p>
+		</td>
+		<td width="449" style="border: 1.00pt solid #000001; padding: 0.18cm">
+			<p align="left" style="border: none; padding: 0cm; page-break-inside: auto; orphans: 0; widows: 0; page-break-after: auto">
+			<font size="3" style="font-size: 12pt">The EyeLink data file will
+			be saved on the Host PC and retrieved to the current &lt;b&gt;'EDF
+			Folder'&lt;/b&gt; at the end of a session. By default, the subject
+			number the user specified at the beginning of a session will be
+			used to name the EDF data file. Please bear in mind that the
+			length of the EDF data file name and hence the subject number you
+			specified CANNOT exceed 8 characters.</font></p>
+		</td>
+	</tr>
+</table>
+<h2 class="western"><br/>
+<br/>
+
+</h2>
+</body>
+</html>
