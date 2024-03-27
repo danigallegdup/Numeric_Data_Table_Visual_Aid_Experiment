@@ -4,13 +4,13 @@
 This research experiemnt explores the effectiveness of using visual aids to understand  numeric data tables.
 
 ## Generated Data Tables: 
-![color](./Experiment%20Data/Other/Generated%20Tables/anime.csv_color.png)
+![color](./Experiment_Data/Tables_PNG/DS2_anime_bar2.png)
 
-![bar](./Experiment%20Data/Other/Generated%20Tables/anime.csv_bar.png)
+![bar](./Experiment_Data/Tables_PNG/DS12_candy_bar4.png)
 
-![zebra](./Experiment%20Data/Other/Generated%20Tables/anime.csv_zebra.png)
+![zebra](./Experiment_Data/Tables_PNG/DS6_cereal_zebra2.png)
 
-![plain](./Experiment%20Data/Other/Generated%20Tables/anime.csv_plain.png)
+![plain](./Experiment_Data/Tables_PNG/DS13_movie_plain1.png)
 
 
 ## Shortlisted Data Table Tasks:
@@ -38,10 +38,10 @@ From the list of tasks that were shortlisted and the table generating process th
 ## Running the Experiment
 
 ### Important Files and Folders
-- [test.py](./test.py): Main file for Running the experiment
+- [test.py](./start_experiment.py): Main file for Running the experiment
 - [EyeTrackerHandler.py](./EyeTrackerHandler.py): supporting class incharge of eye Tracker
-- [Results](./Results/): input file and results of each participant 
-- [Exeriment_Data](./Experiment%20Data/):Find Tables used int the experiment
+- [Results](./Experiment_Results/): input file and results of each participant 
+- [Exeriment_Data](./Experiment_Data/):Find Tables used int the experiment
 
 
 ### Dependencies\How to Run:
