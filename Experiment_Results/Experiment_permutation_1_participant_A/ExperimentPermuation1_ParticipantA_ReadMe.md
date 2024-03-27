@@ -10,7 +10,6 @@
 8. mouselog
 
 
-
 # in progress
 1. Creating all the experiment permutations
 2. Running test to ensure all tasks are good to go

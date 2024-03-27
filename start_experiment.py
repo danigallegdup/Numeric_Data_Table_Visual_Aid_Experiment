@@ -63,12 +63,11 @@ Task_CSV_Path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type
 Table_PNG_Path = f'{task_information[Table_PNG_Index]}'
 
 # output files paths
-# ./Experiment_Results/Experiment_permutation_01_participant_A/ExperimentPermuation1_ParticipantA_Results/Mainlog_Experiment1_ParticipantA_2024-03-27-11-04-30.csv
-# ./Experiment_Results./Experiment_permutation_1_participant_A\ExperimentPermuation1_ParticipantA_Results\mouse_logs_ExperimentPermuation1_ParticipantA
+# Experiment_Results/Experiment_permutation_1_participant_A/EP1_PA_Results/mouse_logs_EP1_PA_
+# 
 
-
-mainlog_file = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}_Results/Mainlog_Experiment{Experiment_Permutation}_Participant{Participant_ID}_{Date_and_Time}.csv'
-mouse_log_path = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}_Results/mouse_logs_ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}/'
+mainlog_file = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/Mainlog_Experiment{Experiment_Permutation}_Participant{Participant_ID}_{Date_and_Time}.csv'
+mouse_log_path = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/mouse_logs_EP{Experiment_Permutation}_P{Participant_ID}_/'
 gaze_log = "./gaze_log.csv"
 fixation_log = "./fixation_log.csv"
 
