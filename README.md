@@ -4,7 +4,7 @@
 This research experiemnt explores the effectiveness of using visual aids to understand  numeric data tables.
 
 ## Generated Data Tables: 
-![color](./Experiment_Data/Tables_PNG/DS2_anime_bar2.png)
+![color](./Experiment_Data/Tables_PNG/DS2_anime_color2.png)
 
 ![bar](./Experiment_Data/Tables_PNG/DS12_candy_bar4.png)
 
