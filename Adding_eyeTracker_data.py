@@ -350,7 +350,7 @@ class Experimenters_Interface:
         print(task_information[Table_PNG_Index], self.controller.get_counter())
 
         recorded_var = tk.StringVar()  # Define recorded_var
-        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Topic_Index]}.csv'
+        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Task_Type_Index]}.csv'
         self.load_csv_and_create_buttons(self.left_frame, file_path, recorded_var)
         self.create_label_and_picture(self.right_frame, task_information)
         self.task3_create_bottom_section(task_information, self.bottom_frame, recorded_var)  # Pass recorded_var to create_bottom_section
@@ -411,7 +411,7 @@ class Experimenters_Interface:
         self.clear_frame(self.right_frame)
         self.clear_frame(self.bottom_frame)
 
-        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Topic_Index]}.csv'
+        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Task_Type_Index]}.csv'
         print(task_information[Table_PNG_Index], self.controller.get_counter())
         self.root.title(name_of_task)
         
