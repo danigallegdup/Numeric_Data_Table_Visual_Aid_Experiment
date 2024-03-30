@@ -21,6 +21,13 @@ experiment Script:
 
 '''
 
+
+Introduction = "Thank you for participating in this experiment.\nPlease be patient and wait for the experimenter."
+Prompt = "\nPress the space bar as soon as you have found the answer and say the number out loud."
+Progress = "\nPlease do not use the mouse or keyboard\nAfter the experientor has finished recording your answer,\nyou will be able to proceed to the next task by pressing the space bar"
+Next_task = "You have finished all the conditions for this task!\nPlease take the survey that the experimentor will hand to you\n.You might want to take a short break before starting the next task."
+Thank_You = "Thank you for participating in this experiment.\nPlease remain in your seat and for your wait experimenter's response."
+
 # Experient Case
 Experiment_Permutation = 1
 Participant_ID = 'A'
@@ -446,13 +453,14 @@ class Participants_Interface:
         self.root.bind('<space>', self.update_screen)
 
     def display_intro_text(self):
-        self.picture_label.config(text="Introduction text", image='', font=("Helvetica", font_size))
+        self.picture_label.config(text=Introduction, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def display_thank_you(self):
-        self.picture_label.config(text="Thank you for participating", image='', font=("Helvetica", font_size))
+        self.picture_label.config(text=Thank_You, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def display_prompt(self, task_information):
-        self.picture_label.config(text=task_information[Task_Prompt_Index], image='', font=("Helvetica", font_size))
+        message = f"{task_information[Task_Prompt_Index]} \n{Prompt} "
+        self.picture_label.config(text=message, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def display_table(self, task_information):
         self.controller.set_start_time_milliseconds(time.time() * 1000)
@@ -463,8 +471,10 @@ class Participants_Interface:
 
     def display_progress(self):
         self.controller.set_end_time_milliseconds(time.time() * 1000)
-        progress_text = f"Completed {self.controller.get_counter()+1} out of 80 tasks"
-        self.picture_label.config(text=progress_text, image='', font=("Helvetica", font_size))
+        progress_text = f"Completed {self.controller.get_counter()+1} out of 80 tasks" + "\n" + Progress
+        if(self.controller.get_counter()+1 % 16==0 and self.controller.get_counter() >1):
+            progress_text = progress_text + "\n\n" + Next_task
+        self.picture_label.config(text=progress_text, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def update_screen(self, event=None):
         if self.previous_counter < self.controller.get_counter():
