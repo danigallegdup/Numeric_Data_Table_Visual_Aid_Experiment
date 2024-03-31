@@ -157,27 +157,14 @@ class Controller:
 #eye tracker
     def start_tracking(self):
         # Start recording samples and events
-        if(not self.el_tracker.isConnected() or self.el_tracker.breakPressed()):
-            print("Error")
-            return 1
+        # Start recording samples and events
+        error = self.el_tracker.startRecording(1, 1, 1, 1)
+        if error:
+            return error
 
-        while True:
-            ret_value = self.do_trial()
-
-            if (ret_value == pylink.TRIAL_OK):
-                self.el_tracker.sendMessage("TRIAL OK")
-                break
-            elif (ret_value == pylink.SKIP_TRIAL):
-                self.el_tracker.sendMessage("TRIAL ABORTED")
-                break
-            elif (ret_value == pylink.ABORT_EXPT):
-                self.el_tracker.sendMessage("EXPERIMENT ABORTED")
-                return pylink.ABORT_EXPT
-            elif (ret_value == pylink.REPEAT_TRIAL):
-                self.el_tracker.sendMessage("TRIAL REPEATED")
-            else:
-                self.el_tracker.sendMessage("TRIAL ERROR")
-                break
+        # Begin real-time mode
+        pylink.beginRealTimeMode(100)
+       
 
     # this will be called by  -- trial = counter
     def do_trial(self):
