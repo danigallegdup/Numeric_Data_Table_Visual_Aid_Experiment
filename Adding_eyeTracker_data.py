@@ -241,11 +241,11 @@ class Controller:
         self.mouse_log_thread = threading.Thread(target=self.log_mouse_position)
         self.mouse_log_thread.start()
 
-    def stop_mouse_logging(self):
+    def stop_mouse_logging(self, task_name):
         self.mouse_log_enabled = False
         if self.mouse_log_thread is not None:
             self.mouse_log_thread.join()
-        self.save_mouse_log()
+        self.save_mouse_log(task_name)
 
     def log_mouse_position(self):
         while self.mouse_log_enabled:
@@ -254,9 +254,9 @@ class Controller:
             time.sleep(0.1)  # Log every 100 milliseconds
             self.save_mouse_log() # Save log to file
 
-    def save_mouse_log(self):
+    def save_mouse_log(self, task_name):
         # Ensure the directory exists
-        filename = mouse_log_path + f"mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        filename = task_name + mouse_log_path + f"mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["Timestamp", "X", "Y"])
@@ -551,7 +551,7 @@ class Participants_Interface:
             self.controller.start_mouse_logging()
             self.display_table(task_information)
         elif self.state == 2:
-            self.controller.stop_mouse_logging()
+            self.controller.stop_mouse_logging(self.keys_list(self.controller.get_counter()))
             self.controller.stop_and_store_tracking()
             self.display_progress()
             self.can_progress = False
