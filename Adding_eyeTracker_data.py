@@ -158,33 +158,43 @@ class Controller:
         pylink.beginRealTimeMode(100)
     
     def stop_and_store_tracking(self):
-        # End real-time mode
+
+        # get the currently active tracker object (connection)
+        el_tracker = pylink.getEYELINK()
+
         pylink.endRealTimeMode()
+        pylink.pumpDelay(100)
+        el_tracker.stopRecording()
 
-        # Stop recording
-        self.el_tracker.stopRecording()
+        while el_tracker.getkey():
+            pass       
+        # # End real-time mode
+        # pylink.endRealTimeMode()
 
-        # Set the tracker to offline mode
-        self.el_tracker.setOfflineMode()
+        # # Stop recording
+        # self.el_tracker.stopRecording()
 
-        # Wait a bit for the tracker to switch to offline mode
-        pylink.msecDelay(500)
+        # # Set the tracker to offline mode
+        # self.el_tracker.setOfflineMode()
 
-        # Define the name of the EDF file on the Host PC
-        edf_file_name = "TEST.EDF"
+        # # Wait a bit for the tracker to switch to offline mode
+        # pylink.msecDelay(500)
 
-        # Define the directory where you want to store the data
-        local_file_path = "./results"
+        # # Define the name of the EDF file on the Host PC
+        # edf_file_name = "TEST.EDF"
+
+        # # Define the directory where you want to store the data
+        # local_file_path = "./results"
         
-        # Construct the full local file name including the path
-        local_file_name = os.path.join(local_file_path, edf_file_name)
+        # # Construct the full local file name including the path
+        # local_file_name = os.path.join(local_file_path, edf_file_name)
 
-        # Transfer the file from the Host PC to your local machine
-        try:
-            # Make sure to provide the full file name, not just the directory
-            self.el_tracker.receiveDataFile(edf_file_name, local_file_name)
-        except RuntimeError as error:
-            print('ERROR:', error)
+        # # Transfer the file from the Host PC to your local machine
+        # try:
+        #     # Make sure to provide the full file name, not just the directory
+        #     self.el_tracker.receiveDataFile(edf_file_name, local_file_name)
+        # except RuntimeError as error:
+        #     print('ERROR:', error)
 
 
 # timers
@@ -616,6 +626,33 @@ def initialize_tracker():
             sys.exit()
     return el_tracker
 
+
+# ------- Eye Tracker File Transfer and clean up
+def close_eye_tracker(el_tracker):
+    """Closes the EyeLink tracker."""
+    # Step 7: File transfer and cleanup
+    if el_tracker is not None:
+        el_tracker.setOfflineMode()
+        pylink.msecDelay(500)
+
+        # Close the edf data file on the Host
+        el_tracker.closeDataFile()
+
+        results_folder = 'results'
+        edf_file_name = "TEST.EDF"
+
+
+        # transfer the edf file to the Display PC and rename it
+        local_file_name = os.path.join(results_folder, edf_file_name)
+
+        try:
+            el_tracker.receiveDataFile(edf_file_name, local_file_name)
+        except RuntimeError as error:
+            print('ERROR:', error)
+
+    # Step 8: close EyeLink connection and quit display-side graphics
+    el_tracker.close()
+
 def main():
     el_tracker = initialize_tracker()
     Experiment_Permutation = int(input("Input the experiment permutation: "))
@@ -628,9 +665,7 @@ def main():
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
     both_screen(data_dictionary, el_tracker)
 
-     # Cleanup
-    if el_tracker is not None:
-        el_tracker.close()
+    close_eye_tracker(el_tracker)
 
 
 if __name__ == "__main__":
