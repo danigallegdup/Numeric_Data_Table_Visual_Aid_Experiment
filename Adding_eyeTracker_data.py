@@ -202,13 +202,14 @@ class Controller:
             el_tracker = pylink.getEYELINK()
 
             # show some info about the current trial on the Host PC screen
-            pars_to_show = (self.get_counter()+1, 80) 
+            
+            pars_to_show = ("getting ready to track", self.get_counter(), 80)
             status_message = 'Link event example, %s, Trial %d/%d' % pars_to_show
             el_tracker.sendCommand("record_status_message '%s'" % status_message)
 
             # log a TRIALID message to mark trial start, before starting to record.
             # EyeLink Data Viewer defines the start of a trial by the TRIALID message.
-            el_tracker.sendMessage("TRIALID %d" % self.get_counter()+1)
+            el_tracker.sendMessage("TRIALID %d" % self.get_counter())
 
             # clear tracker display to black
             el_tracker.sendCommand("clear_screen 0")
@@ -552,10 +553,10 @@ class Controller:
     
 # mouse logs
 
-    def start_mouse_logging(self):
+    def start_mouse_logging(self, task_name):
         self.mouse_log_enabled = True
         self.mouse_log = []
-        self.mouse_log_thread = threading.Thread(target=self.log_mouse_position)
+        self.mouse_log_thread = threading.Thread(target=self.log_mouse_position(task_name))
         self.mouse_log_thread.start()
 
     def stop_mouse_logging(self, task_name):
@@ -564,16 +565,16 @@ class Controller:
             self.mouse_log_thread.join()
         self.save_mouse_log(task_name)
 
-    def log_mouse_position(self):
+    def log_mouse_position(self, task_name):
         while self.mouse_log_enabled:
             position = pyautogui.position()
             self.mouse_log.append((datetime.now(), position))
             time.sleep(0.1)  # Log every 100 milliseconds
-            self.save_mouse_log() # Save log to file
+            self.save_mouse_log(task_name) # Save log to file
 
     def save_mouse_log(self, task_name):
         # Ensure the directory exists
-        filename = task_name + mouse_log_path + f"mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        filename = mouse_log_path + task_name+ f"mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["Timestamp", "X", "Y"])
@@ -838,6 +839,7 @@ class Participants_Interface:
         img = img.resize((self.screen_width, self.screen_height), Image.LANCZOS)
         self.photo = ImageTk.PhotoImage(img)
         self.picture_label.config(image=self.photo, text='')
+        self.controller.start_tracking()
 
     def display_progress(self):
         self.controller.set_end_time_milliseconds(time.time() * 1000)
@@ -864,11 +866,11 @@ class Participants_Interface:
         elif self.state == 0:
             self.display_prompt(task_information)
         elif self.state == 1:
-            self.controller.start_tracking()
-            self.controller.start_mouse_logging()
+            
+            self.controller.start_mouse_logging(name_of_task)
             self.display_table(task_information)
         elif self.state == 2:
-            self.controller.stop_mouse_logging(self.keys_list(self.controller.get_counter()))
+            self.controller.stop_mouse_logging(name_of_task)
             self.controller.stop_and_store_tracking()
             self.display_progress()
             self.can_progress = False
