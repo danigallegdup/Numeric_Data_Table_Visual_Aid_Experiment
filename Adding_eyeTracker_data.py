@@ -125,6 +125,13 @@ MainLog = [Experiment_permutation_Index ,participant_ID_Index, Task_iteration_In
 # Participants constants
 font_size = 32
 
+# eyetracker
+# some global constants
+RIGHT_EYE = 1
+LEFT_EYE = 0
+BINOCULAR = 2
+
+
 class Controller:
     def __init__(self,el_tracker):
         # INDEXES FOR BOTH GUI'S TO STAY IN SYNC
@@ -150,16 +157,30 @@ class Controller:
 #eye tracker
     def start_tracking(self):
         # Start recording samples and events
-        error = self.el_tracker.startRecording(1, 1, 1, 1)
-        if error:
-            return error
+        if(not self.el_tracker.isConnected() or self.el_tracker.breakPressed()):
+            print("Error")
+            return 1
 
-        # Begin real-time mode
-        pylink.beginRealTimeMode(100)
-        self.do_trial(1)
+        while True:
+            ret_value = self.do_trial()
+
+            if (ret_value == pylink.TRIAL_OK):
+                self.el_tracker.sendMessage("TRIAL OK")
+                break
+            elif (ret_value == pylink.SKIP_TRIAL):
+                self.el_tracker.sendMessage("TRIAL ABORTED")
+                break
+            elif (ret_value == pylink.ABORT_EXPT):
+                self.el_tracker.sendMessage("EXPERIMENT ABORTED")
+                return pylink.ABORT_EXPT
+            elif (ret_value == pylink.REPEAT_TRIAL):
+                self.el_tracker.sendMessage("TRIAL REPEATED")
+            else:
+                self.el_tracker.sendMessage("TRIAL ERROR")
+                break
 
     # this will be called by  -- trial = counter
-    def do_trial(self, trial):
+    def do_trial(self):
             """ Run a single trial
 
             Retrieve eye events, in addition to samples, during recording.
@@ -181,13 +202,13 @@ class Controller:
             el_tracker = pylink.getEYELINK()
 
             # show some info about the current trial on the Host PC screen
-            pars_to_show = (trial_condition[trial], trial + 1, N_TRIALS)
+            pars_to_show = (self.get_counter()+1, 80) 
             status_message = 'Link event example, %s, Trial %d/%d' % pars_to_show
             el_tracker.sendCommand("record_status_message '%s'" % status_message)
 
             # log a TRIALID message to mark trial start, before starting to record.
             # EyeLink Data Viewer defines the start of a trial by the TRIALID message.
-            el_tracker.sendMessage("TRIALID %d" % trial)
+            el_tracker.sendMessage("TRIALID %d" % self.get_counter()+1)
 
             # clear tracker display to black
             el_tracker.sendCommand("clear_screen 0")
@@ -233,7 +254,7 @@ class Controller:
             except RuntimeError:
                 # wait time expired without link data
                 if pylink.getLastError()[0] == 0:
-                    end_trial()
+                    self.end_trial()
                     print("ERROR: No link data received!")
                     return pylink.TRIAL_ERROR
                 # for any other status simply re-raise the exception
@@ -263,23 +284,24 @@ class Controller:
                 # REPEAT_TRIAL, SKIP_TRIAL, ABORT_EXPT, TRIAL_ERROR )
                 error = el_tracker.isRecording()
                 if error != pylink.TRIAL_OK:
-                    end_trial()
+                    self.end_trial()
                     return error
 
                 # check if trial duration exceeded
-                if pylink.currentTime() > (start_time + TRIAL_DUR):
+                duration = 5000
+                if pylink.currentTime() > (start_time + duration ):
                     el_tracker.sendMessage("TIMEOUT")
-                    end_trial()
+                    self.end_trial()
                     break
 
                 # program termination or ALT-F4 or CTRL-C keys
                 if el_tracker.breakPressed():
-                    end_trial()
+                    self.end_trial()
                     return pylink.ABORT_EXPT
 
                 # check for local ESC key to abort trial (useful in debugging)
                 elif el_tracker.escapePressed():
-                    end_trial()
+                    self.end_trial()
                     return pylink.SKIP_TRIAL
 
                 # do we have a sample in the sample buffer?
@@ -318,7 +340,7 @@ class Controller:
                         ldata = el_tracker.getFloatData()
                         if ldata.getEye() == eye_used:
                             gaze = ldata.getAverageGaze()
-                            drawFixation((gaze[0], gaze[1]), COLOUR_WHITE)
+                            self.drawFixation((gaze[0], gaze[1]), 15) # COLOUR_WHITE
                             fix_update_counter = fix_update_counter + 1
 
                     elif ltype == pylink.STARTFIX:
@@ -367,7 +389,7 @@ class Controller:
                             gazeEnd = ldata.getEndGaze()
                             gazeStart = ldata.getStartGaze()
                             sacc = (gazeStart[0], gazeStart[1], gazeEnd[0], gazeEnd[1])
-                            drawSaccade(sacc, COLOUR_WHITE)
+                            self.drawSaccade(sacc, 15) # COLOUR_WHITE
                             sacc_end_counter = sacc_end_counter + 1
 
                     # blink events
@@ -387,7 +409,7 @@ class Controller:
                 el_tracker.sendMessage("TRIAL_RESULT 0")
 
                 # record the trial variable in a message recognized by Data Viewer
-                el_tracker.sendMessage("!V TRIAL_VAR trial %d" % trial)
+                el_tracker.sendMessage("!V TRIAL_VAR trial %d" % self.counter)
 
                 # return exit record status
                 ret_value = el_tracker.getRecordingStatus()
@@ -479,33 +501,7 @@ class Controller:
 
     
     def stop_and_store_tracking(self):
-        # End real-time mode
-        pylink.endRealTimeMode()
-
-        # Stop recording
-        self.el_tracker.stopRecording()
-
-        # Set the tracker to offline mode
-        self.el_tracker.setOfflineMode()
-
-        # Wait a bit for the tracker to switch to offline mode
-        pylink.msecDelay(500)
-
-        # Define the name of the EDF file on the Host PC
-        edf_file_name = "TEST.EDF"
-
-        # Define the directory where you want to store the data
-        local_file_path = "./results"
-        
-        # Construct the full local file name including the path
-        local_file_name = os.path.join(local_file_path, edf_file_name)
-
-        # Transfer the file from the Host PC to your local machine
-        try:
-            # Make sure to provide the full file name, not just the directory
-            self.el_tracker.receiveDataFile(edf_file_name, local_file_name)
-        except RuntimeError as error:
-            print('ERROR:', error)
+        self.end_trial()  
 
 
 # timers
@@ -990,6 +986,61 @@ def setup_eye_tracker():
     root.bind('<Escape>', on_escape)
     return el_tracker
 
+# ------- Eye Tracker File Transfer and clean up
+def close_eye_tracker(el_tracker):
+    """Closes the EyeLink tracker."""
+    # Step 7: File transfer and cleanup
+    if el_tracker is not None:
+        el_tracker.setOfflineMode()
+        pylink.msecDelay(500)
+
+        # Close the edf data file on the Host
+        el_tracker.closeDataFile()
+
+        results_folder = 'results'
+        edf_file_name = "TEST.EDF"
+
+
+        # transfer the edf file to the Display PC and rename it
+        local_file_name = os.path.join(results_folder, edf_file_name)
+
+        try:
+            el_tracker.receiveDataFile(edf_file_name, local_file_name)
+        except RuntimeError as error:
+            print('ERROR:', error)
+
+    # Step 8: close EyeLink connection and quit display-side graphics
+    el_tracker.close()
+
+# code that I used to have
+
+    # End real-time mode
+    #pylink.endRealTimeMode()
+
+    # # Stop recording
+    # self.el_tracker.stopRecording()
+
+    # # Set the tracker to offline mode
+    # self.el_tracker.setOfflineMode()
+
+    # # Wait a bit for the tracker to switch to offline mode
+    # pylink.msecDelay(500)
+
+    # # Define the name of the EDF file on the Host PC
+    # edf_file_name = "TEST.EDF"
+
+    # # Define the directory where you want to store the data
+    # local_file_path = "./results"
+        
+    # # Construct the full local file name including the path
+    # local_file_name = os.path.join(local_file_path, edf_file_name)
+
+    # # Transfer the file from the Host PC to your local machine
+    # try:
+    #     # Make sure to provide the full file name, not just the directory
+    #     el_tracker.receiveDataFile(edf_file_name, local_file_name)
+    # except RuntimeError as error:
+    #     print('ERROR:', error)
 
 def main():
     el_tracker = setup_eye_tracker()
@@ -1009,9 +1060,7 @@ def main():
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
     both_screen(data_dictionary, el_tracker)
 
-     # Cleanup
-    if el_tracker is not None:
-        el_tracker.close()
+    close_eye_tracker(el_tracker)
 
 
 if __name__ == "__main__":
