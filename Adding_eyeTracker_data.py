@@ -605,9 +605,14 @@ def main(el_tracker):
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
     both_screen(data_dictionary, el_tracker)
 
+     # Cleanup
+    if el_tracker is not None:
+        el_tracker.close()
+
 
 if __name__ == "__main__":
     el_tracker = sys.argv[1]
     main(el_tracker)
+    
     
    

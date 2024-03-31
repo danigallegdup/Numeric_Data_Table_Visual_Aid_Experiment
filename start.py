@@ -3,6 +3,7 @@ import os
 import sys
 import pylink
 import subprocess
+import tkinter as tk
 
 
 """
@@ -26,10 +27,9 @@ SCN_HEIGHT = 1080
 # Dummy mode flag - set to True if no real tracker is connected
 dummy_mode = False
 
-# Create a results folder to store data files
-results_folder = 'results'
-if not os.path.exists(results_folder):
-    os.makedirs(results_folder)
+def on_escape(event=None, ):
+    # Close the graphics
+    pylink.closeGraphics()
 
 def initialize_tracker():
     """Initializes the EyeLink tracker."""
@@ -70,6 +70,7 @@ def calibrate_tracker(el_tracker):
 
 def main():
     # Step 1: Initialize the EyeLink tracker
+    root = tk.Tk()
     el_tracker = initialize_tracker()
 
     # Change to the script directory
@@ -88,11 +89,8 @@ def main():
 
     # Step 5: Perform initial calibration
     calibrate_tracker(el_tracker)
-
-    # Cleanup
-    if el_tracker is not None:
-        el_tracker.close()
-
+    
+    root.bind('<Escape>', on_escape)
     subprocess.call(["python", "./adding_eyeTracker_data.py", el_tracker])
 
 if __name__ == "__main__":
