@@ -156,6 +156,327 @@ class Controller:
 
         # Begin real-time mode
         pylink.beginRealTimeMode(100)
+        self.do_trial(1)
+
+    # this will be called by  -- trial = counter
+    def do_trial(self, trial):
+            """ Run a single trial
+
+            Retrieve eye events, in addition to samples, during recording.
+            """
+
+            # initialize link events count
+            fix_update_counter = 0
+            sacc_start_counter = 0
+            sacc_end_counter = 0
+            fix_start_counter = 0
+            fix_end_counter = 0
+
+            # initialize sample data, saccade data and button input variables
+            new_smp = None
+            smp = None
+            sacc = (0, 0, 0, 0)
+
+            # get the currently active tracker object (connection)
+            el_tracker = pylink.getEYELINK()
+
+            # show some info about the current trial on the Host PC screen
+            pars_to_show = (trial_condition[trial], trial + 1, N_TRIALS)
+            status_message = 'Link event example, %s, Trial %d/%d' % pars_to_show
+            el_tracker.sendCommand("record_status_message '%s'" % status_message)
+
+            # log a TRIALID message to mark trial start, before starting to record.
+            # EyeLink Data Viewer defines the start of a trial by the TRIALID message.
+            el_tracker.sendMessage("TRIALID %d" % trial)
+
+            # clear tracker display to black
+            el_tracker.sendCommand("clear_screen 0")
+
+            # perform a drift-check(/correction) at the start of each trial
+            while True:
+                # check whether we are still connected to the tracker
+                if not el_tracker.isConnected():
+                    return pylink.ABORT_EXPT
+
+                # drift-check; re-do camera setup, if needed
+                try:
+                    error = el_tracker.doDriftCorrect(int(SCN_WIDTH/2.0),
+                                                    int(SCN_HEIGHT/2.0), 1, 1)
+                    # if the "ESC" key is pressed, get back to Camera Setup
+                    if error != pylink.ESC_KEY:
+                        break
+                    else:
+                        el_tracker.doTrackerSetup()
+                except:
+                    pass
+
+            # switch tracker to idle mode
+            el_tracker.setOfflineMode()
+
+            # start recording samples and events; save them to the EDF file and
+            # make them available over the link
+            error = el_tracker.startRecording(1, 1, 1, 1)
+            if error:
+                return error
+
+            # begin the real-time mode
+            pylink.beginRealTimeMode(100)
+
+            # INSERT CODE TO DRAW INITIAL DISPLAY HERE
+
+            # log a message to mark the time at which the initial display came on
+            el_tracker.sendMessage("SYNCTIME")
+
+            # wait for link data to arrive
+            try:
+                el_tracker.waitForBlockStart(100, 1, 1)
+            except RuntimeError:
+                # wait time expired without link data
+                if pylink.getLastError()[0] == 0:
+                    end_trial()
+                    print("ERROR: No link data received!")
+                    return pylink.TRIAL_ERROR
+                # for any other status simply re-raise the exception
+                else:
+                    raise
+
+            # determine which eye(s) is/are available
+            eye_used = el_tracker.eyeAvailable()
+            if eye_used == RIGHT_EYE:
+                el_tracker.sendMessage("EYE_USED 1 RIGHT")
+            elif eye_used == LEFT_EYE or eye_used == BINOCULAR:
+                el_tracker.sendMessage("EYE_USED 0 LEFT")
+                eye_used = LEFT_EYE
+            else:
+                print("Error in getting the eye information!")
+                return pylink.TRIAL_ERROR
+
+            # reset keys and buttons on tracker
+            el_tracker.flushKeybuttons(0)
+
+            # get trial start time
+            start_time = pylink.currentTime()
+            # poll link events and samples
+            while True:
+                # first check if recording is aborted
+                # (returns 0 if no error, otherwise return codes, e.g.,
+                # REPEAT_TRIAL, SKIP_TRIAL, ABORT_EXPT, TRIAL_ERROR )
+                error = el_tracker.isRecording()
+                if error != pylink.TRIAL_OK:
+                    end_trial()
+                    return error
+
+                # check if trial duration exceeded
+                if pylink.currentTime() > (start_time + TRIAL_DUR):
+                    el_tracker.sendMessage("TIMEOUT")
+                    end_trial()
+                    break
+
+                # program termination or ALT-F4 or CTRL-C keys
+                if el_tracker.breakPressed():
+                    end_trial()
+                    return pylink.ABORT_EXPT
+
+                # check for local ESC key to abort trial (useful in debugging)
+                elif el_tracker.escapePressed():
+                    end_trial()
+                    return pylink.SKIP_TRIAL
+
+                # do we have a sample in the sample buffer?
+                # and does it differ from the one we've seen before?
+                new_smp = el_tracker.getNewestSample()
+                if new_smp is not None:
+                    if(smp is None or new_smp.getTime() != smp.getTime()):
+                        # it is a new sample, mark it for future comparisons
+                        smp = new_smp
+                        # Check if the new sample has data for the eye
+                        # currently being tracked,
+                        if eye_used == RIGHT_EYE and smp.isRightSample():
+                            sample = smp.getRightEye().getGaze()
+                        elif eye_used != RIGHT_EYE and smp.isLeftSample():
+                            sample = smp.getLeftEye().getGaze()
+
+                        # INSERT OWN CODE (EX: GAZE-CONTINGENT GRAPHICS)
+
+                # now we consume and process the events and samples that are in the
+                # link data queue until there are no more left.
+                while True:
+                    ltype = el_tracker.getNextData()
+                    # if there are no more link data items, we have nothing more to
+                    # consume and we can do other things until we get it.
+                    if not ltype:
+                        break
+
+                    # there is link data to be processed,
+                    # let's see if it's something we need to look at
+                    if ltype == pylink.FIXUPDATE:
+                        # record to EDF the arrival of a fixation update event
+                        el_tracker.sendMessage("fixUpdate")
+                        # fetch fixation update event then update the target position
+                        # according to the retrieved gaze coordinates but only if the
+                        # data corresponds to the eye being tracked
+                        ldata = el_tracker.getFloatData()
+                        if ldata.getEye() == eye_used:
+                            gaze = ldata.getAverageGaze()
+                            drawFixation((gaze[0], gaze[1]), COLOUR_WHITE)
+                            fix_update_counter = fix_update_counter + 1
+
+                    elif ltype == pylink.STARTFIX:
+                        # record to EDF the arrival of a fixation start event
+                        el_tracker.sendMessage("fixStart")
+                        # fetch fixation start event then increment count of similar
+                        # but only if the data was from to the eye being tracked
+                        ldata = el_tracker.getFloatData()
+                        if ldata.getEye() == eye_used:
+                            fix_start_counter = fix_start_counter + 1
+
+                    elif ltype == pylink.ENDFIX:
+                        # record to EDF the arrival of a fixation end event
+                        el_tracker.sendMessage("fixEnd")
+                        # fetch fixation end event then update the target position
+                        # according to the retrieved gaze coordinates but only if the
+                        # data is from the eye being tracked
+                        ldata = el_tracker.getFloatData()
+                        if ldata.getEye() == eye_used:
+                            gaze = ldata.getAverageGaze()
+                            fix_end_counter = fix_end_counter + 1
+
+                    elif ltype == pylink.STARTSACC:
+                        # record to EDF the arrival of a saccade start event
+                        el_tracker.sendMessage("saccStart")
+                        # we fetch saccade start event then update the target position
+                        # but only if the data was from the eye being tracked
+                        ldata = el_tracker.getFloatData()
+                        if ldata.getEye() == eye_used:
+                            if sample:
+                                # update target position to match the coordinates of
+                                # the last sample we've encountered if available.
+                                # Saccade start events do not store gaze coordinates
+                                # unless link_event_data is set to include NOSTART
+                                sacc = (sample[0], sample[1], 0, 0)
+                                sacc_start_counter = sacc_start_counter + 1
+
+                    elif ltype == pylink.ENDSACC:
+                        # record to EDF the arrival of a saccade end event
+                        el_tracker.sendMessage("saccEnd")
+                        # fetch saccade end event then update the target position
+                        # according to the retrieved gaze coordinates but only if the
+                        # data was from the eye being tracked
+                        ldata = el_tracker.getFloatData()
+                        if ldata.getEye() == eye_used:
+                            gazeEnd = ldata.getEndGaze()
+                            gazeStart = ldata.getStartGaze()
+                            sacc = (gazeStart[0], gazeStart[1], gazeEnd[0], gazeEnd[1])
+                            drawSaccade(sacc, COLOUR_WHITE)
+                            sacc_end_counter = sacc_end_counter + 1
+
+                    # blink events
+                    elif ltype == pylink.STARTBLINK:
+                        pass
+                    elif ltype == pylink.ENDBLINK:
+                        pass
+                    else:
+                        pass
+
+                # after loop send message with link data event stats
+                el_tracker.sendMessage("fixUpdate Count: %d" % fix_update_counter)
+                el_tracker.sendMessage("fixStart Count: %d" % fix_start_counter)
+                el_tracker.sendMessage("fixEnd Count: %d" % fix_end_counter)
+                el_tracker.sendMessage("saccStart Count: %d" % sacc_start_counter)
+                el_tracker.sendMessage("saccEnd Count: %d" % sacc_end_counter)
+                el_tracker.sendMessage("TRIAL_RESULT 0")
+
+                # record the trial variable in a message recognized by Data Viewer
+                el_tracker.sendMessage("!V TRIAL_VAR trial %d" % trial)
+
+                # return exit record status
+                ret_value = el_tracker.getRecordingStatus()
+
+                # end real-time mode
+                pylink.endRealTimeMode()
+
+                return ret_value
+
+    
+    def drawFixation(self, fix, colour):
+        """ Send a command to draw a cross or filled box on the tracker screen
+
+        Draw a cross or a filled box representing a fixation or 'fixation update'
+        event on the tracker display.
+
+        Parameters:
+        fix: a two or four-element tuple to be interpreted as follows:
+            if 'fix' contains two elements a cross is requested.
+                Interpret as fix[0]=x, fix[1]=y
+            if  'fix' contains four elements a filled box is requested.
+                Interpret as fix[0]=left, fix[1]=top, fix[2]=width, fix[3]=height
+        colour: numerical value from 0 to 15 to represent the colour of the target
+        """
+
+        # get the currently active tracker object (connection)
+        el_tracker = pylink.getEYELINK()
+
+        err = "drawFixation expects a 2- or 4-element tuple\n"
+
+        if len(fix) == 2:
+            el_tracker.drawCross(fix[0], fix[1], colour)
+
+            # alternative solution: user the draw_cross Host command
+            # el_tracker.sendCommand("*draw_cross %d %d %d" % \
+            #                        (int(fix[0]), int(fix[1]), colour))
+
+        elif len(fix) == 4:
+            el_tracker.drawFilledBox(fix[0], fix[1], fix[2], fix[3], colour)
+
+            # alternative solution: user the draw_fill_box Host command
+            # cmd_pars = (int(fix[0] - fix[2]), int(fix[1] - fix[3]),
+            #             int(fix[0] + fix[2]), int(fix[1] + fix[3]), colour)
+            # el_tracker.sendCommand("*draw_filled_box %d %d %d %d %d" % cmd_pars)
+
+        # if 'fix' has other number of elements, give a warning message
+        else:
+            print(err)
+
+
+    def drawSaccade(self, sacc, colour):
+        """ Draw a line representing a saccade on the tracker display
+
+        Parameters:
+        sacc: a four-element tuple to be interpreted as
+            sacc[0] = x1, sacc[1] = y1, sacc[2] = x2, sacc[3] = y2
+        colour: numerical value from 0 to 15 to represent the colour of the target
+        """
+
+        # get the currently active tracker object (connection)
+        el_tracker = pylink.getEYELINK()
+
+        err = "drawSaccade expects a four-element tuple for its first argument\n"
+
+        if len(sacc) == 4:
+            draw_pars = (int(sacc[0]), int(sacc[1]),
+                        int(sacc[2]), int(sacc[3]), colour)
+            el_tracker.sendCommand("*draw_line %d %d %d %d %d" % draw_pars)
+
+        # if 'sacc' has other number of elements, give a warning message
+        else:
+            print(err)
+          
+
+    def end_trial(self):
+        """Ends recording
+
+        We add 100 msec of data to catch final events"""
+
+        # get the currently active tracker object (connection)
+        el_tracker = pylink.getEYELINK()
+
+        pylink.endRealTimeMode()
+        pylink.pumpDelay(100)
+        el_tracker.stopRecording()
+
+        while el_tracker.getkey():
+            pass
+
     
     def stop_and_store_tracking(self):
         # End real-time mode
@@ -618,6 +939,12 @@ def initialize_tracker():
 
 def main():
     el_tracker = initialize_tracker()
+    el_tracker.doTrackerSetup()
+    # Do it from scratch --> neeed you to calibate and validate, Get all the set-up 
+    # then you only need to run the trials during the experiment
+    # clean up and store the output once the experimetnt is done 
+    # Lets get some output!!!!
+
     Experiment_Permutation = int(input("Input the experiment permutation: "))
     Participant_ID = input("Input the participant ID: ")
 

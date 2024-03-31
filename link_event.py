@@ -221,6 +221,7 @@ def end_trial():
         pass
 
 
+# this needs to be the start tracking -- trial = counter
 def do_trial(trial):
     """ Run a single trial
 
@@ -507,6 +508,8 @@ def run_trials():
 # Set the Host PC address to "None" (without quotes) to run the script
 # in "Dummy Mode" (note this script cannot run in dummy mode, as we need to
 # extract eye movement date during recording
+
+# --------------------------------------------------------
 if dummy_mode:
     el_tracker = pylink.EyeLink(None)
     print('ERROR: This task requires real-time gaze data.\n' +
@@ -519,6 +522,8 @@ else:
         print('ERROR:', error)
         sys.exit()
 
+
+# --------------------------------------------------------
 # Step 2: Initializes the graphics (for calibration & stimulus presentation)
 # INSERT THIRD PARTY GRAPHICS (e.g., Pygame) INITIALIZATION HERE IF NEEDED
 pylink.openGraphics((SCN_WIDTH, SCN_HEIGHT), 32)
@@ -531,7 +536,7 @@ SCN_WIDTH = disp.width
 SCN_HEIGHT = disp.height
 
 
-
+# ------ The experiment starts from here -----------------------
 # Step 3: Open an EDF data file on the Host PC
 edf_file_name = "TEST.EDF"
 el_tracker.openDataFile(edf_file_name)
@@ -540,6 +545,7 @@ el_tracker.openDataFile(edf_file_name)
 preamble_text = 'RECORDED BY %s' % os.path.basename(__file__)
 el_tracker.sendCommand("add_file_preamble_text '%s'" % preamble_text)
 
+# --------------------------------------------------------
 # Step 4: setting up tracking, recording and calibration options
 # we first flush all key presses and put the tracker in the offline mode
 pylink.flushGetkeyQueue()
@@ -596,14 +602,19 @@ pylink.setTargetSize(int(SCN_WIDTH/70.0), int(SCN_WIDTH/300.))
 pylink.setCalibrationSounds("", "", "")
 pylink.setDriftCorrectSounds("", "", "")
 
+# --------------------------------------------------------
 # Step 5: Set up the tracker
 el_tracker.doTrackerSetup()
 
+# Do everyting unitl step 5 before you call it into the experiment
+
+# --------------------------------------------------------
 # Step 6: Run trials. make sure display-tracker connection is established
 # and no program termination or ALT-F4 or CTRL-C pressed
 if el_tracker.isConnected() and not el_tracker.breakPressed():
     run_trials()
 
+# --------------------------------------------------------
 # Step 7: File transfer and cleanup
 if el_tracker is not None:
     el_tracker.setOfflineMode()
