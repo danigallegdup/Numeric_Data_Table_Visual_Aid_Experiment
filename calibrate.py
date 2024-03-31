@@ -2,6 +2,22 @@ from __future__ import division, print_function
 import os
 import sys
 import pylink
+import subprocess
+
+
+"""
+This program: Call it start.py
+1) sets up eye tracker, and allows the the user to calibrate, validate and record Fixation and Saccades
+    # 1-initializing connection to the tracker
+    # 2-initializing display-side graphics
+    # 3-initializing data file
+    # 4-setting up tracking, recording and calibration options
+    # 5-initial tracker calibration
+2) Calls the experiment.py script to run the experiment passing el_tracker as a parameter 
+
+"""
+
+
 
 # Set your screen resolution here
 SCN_WIDTH = 1920
@@ -76,6 +92,8 @@ def main():
     # Cleanup
     if el_tracker is not None:
         el_tracker.close()
+
+    subprocess.call(["python", "./adding_eyeTracker_data.py", el_tracker])
 
 if __name__ == "__main__":
     main()

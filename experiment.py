@@ -120,19 +120,26 @@ font_size = 32
 
 class Controller:
     def __init__(self):
+        # INDEXES FOR BOTH GUI'S TO STAY IN SYNC
         self.current_index = -1
         self.experimentor_is_ready = False
-
+        
+        # MOUSE
         self.mouse_log_enabled = False
         self.mouse_log = []
         self.mouse_log_thread = None
 
+        # TIMERS
         self.start_task_milliseconds = None # When the Participants sees the prompt screen (when the task started)
         self.start_time_milliseconds = None # when paticipants sees the stimulous -- table
         self.end_time_milliseconds = None # when paticipants hits the space bar to exit the stimulous
         self.start_time_datetime = None # when paticipants sees the stimulous -- table
         self.end_time_datetime = None # when paticipants hits the space bar to exit the stimulous
         self.time_spend = None # end_time - start_time
+
+        # EYE TRACKER DATA
+        self.fixation_log = []
+        self.saccade_log = []
 
 # timers
 

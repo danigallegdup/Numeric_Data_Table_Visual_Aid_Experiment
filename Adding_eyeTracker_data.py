@@ -8,18 +8,40 @@ import time
 import pyautogui
 import threading
 
-'''
-Results file format:
-
-Timer --> Done 
-Mouse --> Done
-
-Next step: Generage all the input files
+from __future__ import division
+from __future__ import print_function
 
 
-experiment Script:
+import sys
+import os
+import pylink
+
 
 '''
+Take in a parameter for the eye tracker: el_tracker = initialize_tracker()
+into the Class Controller I want it to take in the eye tracker as a parameter
+- start_Tacking_fixation()
+- start_Tracking_saccade()
+- stop_and_record_fixation()
+- stop_and_record_saccade()
+
+in the participants interface
+
+change update_screen(self, task_information):
+- call controller.start_Tacking_fixation()
+- call controller.start_Tracking_saccade()
+- call controller.stop_and_record_fixation()
+- call controller.stop_and_record_saccade()
+
+
+'''
+
+
+Introduction = "Thank you for participating in this experiment.\nPlease be patient and wait for the experimenter."
+Prompt = "\nPress the space bar as soon as you have found the answer and say the number out loud."
+Progress = "\nPlease do not use the mouse or keyboard\nAfter the experientor has finished recording your answer,\nyou will be able to proceed to the next task by pressing the space bar"
+Next_task = "You have finished all the conditions for this task!\nPlease take the survey that the experimentor will hand to you\n.You might want to take a short break before starting the next task."
+Thank_You = "Thank you for participating in this experiment.\nPlease remain in your seat and for your wait experimenter's response."
 
 # Experient Case
 Experiment_Permutation = 1
@@ -50,22 +72,11 @@ Date_and_Time = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
 
 # input files paths
-# Experiment_Results\Experiment_permutation_01_participant_A\ExperimentPermuation1_ParticipantA_Results\Mainlog_Experiment1_ParticipantA_2024-03-27-11-04-30.csv
-# Experiment_Data\Task_Answers_CSV\{Task_Information[Task_Type_Index]}\{Task_Information[Task_Type_Index]}.csv
-# Experiment_Data\Tables_PNG\{Task_Information[Table_PNG_Index]}.png
-
-# ./Experiment_Data/Task_Answers_CSV/{Task_Information[Task_Type_Index]}/{Task_Information[Task_Type_Index]}.csv
-# ./Experiment_Data/Tables_PNG/{Task_Information[Table_PNG_Index]}.png
-
-
 Input_File_Path = f'./Experiment_Results/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}_Input.csv'
 Task_CSV_Path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Task_Type_Index]}.csv'
 Table_PNG_Path = f'{task_information[Table_PNG_Index]}'
 
 # output files paths
-# Experiment_Results/Experiment_permutation_1_participant_A/EP1_PA_Results/mouse_logs_EP1_PA_
-# 
-
 mainlog_file = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/Mainlog_Experiment{Experiment_Permutation}_Participant{Participant_ID}_{Date_and_Time}.csv'
 mouse_log_path = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/mouse_logs_EP{Experiment_Permutation}_P{Participant_ID}_/'
 gaze_log = "./gaze_log.csv"
@@ -112,20 +123,62 @@ MainLog = [Experiment_permutation_Index ,participant_ID_Index, Task_iteration_In
 font_size = 32
 
 class Controller:
-    def __init__(self):
+    def __init__(self,el_tracker):
+        # INDEXES FOR BOTH GUI'S TO STAY IN SYNC
         self.current_index = -1
         self.experimentor_is_ready = False
-
+        
+        # MOUSE
         self.mouse_log_enabled = False
         self.mouse_log = []
         self.mouse_log_thread = None
 
+        # TIMERS
         self.start_task_milliseconds = None # When the Participants sees the prompt screen (when the task started)
         self.start_time_milliseconds = None # when paticipants sees the stimulous -- table
         self.end_time_milliseconds = None # when paticipants hits the space bar to exit the stimulous
         self.start_time_datetime = None # when paticipants sees the stimulous -- table
         self.end_time_datetime = None # when paticipants hits the space bar to exit the stimulous
         self.time_spend = None # end_time - start_time
+
+        # EYE TRACKER DATA
+        self.el_tracker = el_tracker
+
+#eye tracker
+    def start_tracking(self):
+        # Start recording samples and events
+        error = self.el_tracker.startRecording(1, 1, 1, 1)
+        if error:
+            return error
+
+        # Begin real-time mode
+        pylink.beginRealTimeMode(100)
+    
+    def stop_store_tracking(self):
+        # End real-time mode
+        pylink.endRealTimeMode()
+
+        # Stop recording
+        self.el_tracker.stopRecording()
+
+        # Set the tracker to offline mode
+        self.el_tracker.setOfflineMode()
+
+        # Wait a bit for the tracker to switch to offline mode
+        pylink.msecDelay(500)
+
+        # Define the name of the EDF file on the Host PC
+        edf_file_name = "TEST.EDF"
+
+        # Define the path where you want to store the data
+        local_file_path = "Experiment_Results/Experiment_permutation_1_participant_A/EP1_PA_Results/fixation_logs_EP1_PA_"
+
+        # Transfer the file from the Host PC to your local machine
+        try:
+            self.el_tracker.receiveDataFile(edf_file_name, local_file_path)
+        except RuntimeError as error:
+            print('ERROR:', error)
+
 
 # timers
 
@@ -350,7 +403,7 @@ class Experimenters_Interface:
         print(task_information[Table_PNG_Index], self.controller.get_counter())
 
         recorded_var = tk.StringVar()  # Define recorded_var
-        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Task_Type_Index]}.csv'
+        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Topic_Index]}.csv'
         self.load_csv_and_create_buttons(self.left_frame, file_path, recorded_var)
         self.create_label_and_picture(self.right_frame, task_information)
         self.task3_create_bottom_section(task_information, self.bottom_frame, recorded_var)  # Pass recorded_var to create_bottom_section
@@ -411,7 +464,7 @@ class Experimenters_Interface:
         self.clear_frame(self.right_frame)
         self.clear_frame(self.bottom_frame)
 
-        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Task_Type_Index]}.csv'
+        file_path = f'./Experiment_Data/Task_Answers_CSV/{task_information[Task_Type_Index]}/{task_information[Topic_Index]}.csv'
         print(task_information[Table_PNG_Index], self.controller.get_counter())
         self.root.title(name_of_task)
         
@@ -446,13 +499,14 @@ class Participants_Interface:
         self.root.bind('<space>', self.update_screen)
 
     def display_intro_text(self):
-        self.picture_label.config(text="Introduction text", image='', font=("Helvetica", font_size))
+        self.picture_label.config(text=Introduction, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def display_thank_you(self):
-        self.picture_label.config(text="Thank you for participating", image='', font=("Helvetica", font_size))
+        self.picture_label.config(text=Thank_You, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def display_prompt(self, task_information):
-        self.picture_label.config(text=task_information[Task_Prompt_Index], image='', font=("Helvetica", font_size))
+        message = f"{task_information[Task_Prompt_Index]} \n{Prompt} "
+        self.picture_label.config(text=message, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def display_table(self, task_information):
         self.controller.set_start_time_milliseconds(time.time() * 1000)
@@ -463,8 +517,10 @@ class Participants_Interface:
 
     def display_progress(self):
         self.controller.set_end_time_milliseconds(time.time() * 1000)
-        progress_text = f"Completed {self.controller.get_counter()+1} out of 80 tasks"
-        self.picture_label.config(text=progress_text, image='', font=("Helvetica", font_size))
+        progress_text = f"Completed {self.controller.get_counter()+1} out of 80 tasks" + "\n" + Progress
+        if(self.controller.get_counter()+1 % 16==0 and self.controller.get_counter() >1):
+            progress_text = progress_text + "\n\n" + Next_task
+        self.picture_label.config(text=progress_text, image='', font=("Helvetica", font_size), padx=10, pady=10)
 
     def update_screen(self, event=None):
         if self.previous_counter < self.controller.get_counter():
@@ -523,9 +579,9 @@ def start_mainlog():
     with open(mainlog_file, 'w', newline='') as f:
         csv.writer(f).writerow(variable_names)
 
-def both_screen(data_dictionary):
+def both_screen(data_dictionary, el_tracker):
     start_mainlog()
-    controller = Controller()
+    controller = Controller(el_tracker)
 
     root = tk.Tk()
     root.geometry("1700x900")
@@ -538,7 +594,7 @@ def both_screen(data_dictionary):
 
     root.mainloop()
 
-if __name__ == "__main__":
+def main(el_tracker):
     Experiment_Permutation = int(input("Input the experiment permutation: "))
     Participant_ID = input("Input the participant ID: ")
 
@@ -547,5 +603,11 @@ if __name__ == "__main__":
     Input_File_Path = f'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}_Input.csv'
 
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
-    both_screen(data_dictionary)
+    both_screen(data_dictionary, el_tracker)
+
+
+if __name__ == "__main__":
+    el_tracker = sys.argv[1]
+    main(el_tracker)
+    
    
