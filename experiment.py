@@ -15,8 +15,6 @@ Timer --> Done
 Mouse --> Done
 
 Next step: Generage all the input files
-
-
 experiment Script:
 
 '''
