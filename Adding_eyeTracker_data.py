@@ -984,6 +984,8 @@ def setup_eye_tracker():
     calibrate_tracker(el_tracker)
     
     root.bind('<Escape>', on_escape)
+    pylink.closeGraphics()
+    root.destroy()
     return el_tracker
 
 # ------- Eye Tracker File Transfer and clean up
@@ -1012,7 +1014,7 @@ def close_eye_tracker(el_tracker):
     # Step 8: close EyeLink connection and quit display-side graphics
     el_tracker.close()
 
-# code that I used to have
+    # code that I used to have
 
     # End real-time mode
     #pylink.endRealTimeMode()
