@@ -30,6 +30,7 @@ dummy_mode = False
 def on_escape(event=None, ):
     # Close the graphics
     pylink.closeGraphics()
+ 
 
 def initialize_tracker():
     """Initializes the EyeLink tracker."""
@@ -91,7 +92,9 @@ def main():
     calibrate_tracker(el_tracker)
     
     root.bind('<Escape>', on_escape)
-    subprocess.call(["python", "./adding_eyeTracker_data.py", el_tracker])
+    # Step 8: close EyeLink connection and quit display-side graphics
+    el_tracker.close()
+    subprocess.call(["python", "./adding_eyeTracker_data.py"])
 
 if __name__ == "__main__":
     main()

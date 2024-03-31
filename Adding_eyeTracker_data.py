@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import print_function
+
 import csv
 import tkinter as tk
 from tkinter import ttk
@@ -7,10 +10,6 @@ from datetime import datetime
 import time
 import pyautogui
 import threading
-
-from __future__ import division
-from __future__ import print_function
-
 
 import sys
 import os
@@ -35,8 +34,12 @@ change update_screen(self, task_information):
 
 
 '''
+#eye tracker Stuff
+# Dummy mode flag - set to True if no real tracker is connected
+dummy_mode = False
 
 
+# for the participant to read
 Introduction = "Thank you for participating in this experiment.\nPlease be patient and wait for the experimenter."
 Prompt = "\nPress the space bar as soon as you have found the answer and say the number out loud."
 Progress = "\nPlease do not use the mouse or keyboard\nAfter the experientor has finished recording your answer,\nyou will be able to proceed to the next task by pressing the space bar"
@@ -154,7 +157,7 @@ class Controller:
         # Begin real-time mode
         pylink.beginRealTimeMode(100)
     
-    def stop_store_tracking(self):
+    def stop_and_store_tracking(self):
         # End real-time mode
         pylink.endRealTimeMode()
 
@@ -170,12 +173,16 @@ class Controller:
         # Define the name of the EDF file on the Host PC
         edf_file_name = "TEST.EDF"
 
-        # Define the path where you want to store the data
-        local_file_path = "Experiment_Results/Experiment_permutation_1_participant_A/EP1_PA_Results/fixation_logs_EP1_PA_"
+        # Define the directory where you want to store the data
+        local_file_path = "./results"
+        
+        # Construct the full local file name including the path
+        local_file_name = os.path.join(local_file_path, edf_file_name)
 
         # Transfer the file from the Host PC to your local machine
         try:
-            self.el_tracker.receiveDataFile(edf_file_name, local_file_path)
+            # Make sure to provide the full file name, not just the directory
+            self.el_tracker.receiveDataFile(edf_file_name, local_file_name)
         except RuntimeError as error:
             print('ERROR:', error)
 
@@ -540,10 +547,12 @@ class Participants_Interface:
         elif self.state == 0:
             self.display_prompt(task_information)
         elif self.state == 1:
+            self.controller.start_tracking()
             self.controller.start_mouse_logging()
             self.display_table(task_information)
         elif self.state == 2:
             self.controller.stop_mouse_logging()
+            self.controller.stop_and_store_tracking()
             self.display_progress()
             self.can_progress = False
 
@@ -594,7 +603,21 @@ def both_screen(data_dictionary, el_tracker):
 
     root.mainloop()
 
-def main(el_tracker):
+def initialize_tracker():
+    """Initializes the EyeLink tracker."""
+    if dummy_mode:
+        el_tracker = pylink.EyeLink(None)
+        print('Dummy mode activated. No real-time eye tracking data will be available.')
+    else:
+        try:
+            el_tracker = pylink.EyeLink("100.1.1.1")
+        except RuntimeError as error:
+            print('ERROR:', error)
+            sys.exit()
+    return el_tracker
+
+def main():
+    el_tracker = initialize_tracker()
     Experiment_Permutation = int(input("Input the experiment permutation: "))
     Participant_ID = input("Input the participant ID: ")
 
@@ -611,8 +634,7 @@ def main(el_tracker):
 
 
 if __name__ == "__main__":
-    el_tracker = sys.argv[1]
-    main(el_tracker)
+    main()
     
     
    
