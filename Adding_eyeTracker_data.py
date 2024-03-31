@@ -924,6 +924,15 @@ def both_screen(data_dictionary, el_tracker):
 
     root.mainloop()
 
+# ------- Eye Tracker Setup Functions
+# Set your screen resolution here
+SCN_WIDTH = 1920
+SCN_HEIGHT = 1080
+
+def on_escape(event=None, ):
+    # Close the graphics
+    pylink.closeGraphics()
+ 
 def initialize_tracker():
     """Initializes the EyeLink tracker."""
     if dummy_mode:
@@ -937,18 +946,63 @@ def initialize_tracker():
             sys.exit()
     return el_tracker
 
-def main():
-    el_tracker = initialize_tracker()
+def setup_display(el_tracker):
+    """Initializes the display-side graphics."""
+    pylink.openGraphics((SCN_WIDTH, SCN_HEIGHT), 32)
+
+def setup_data_file(el_tracker):
+    """Opens an EDF data file on the Host PC."""
+    edf_file_name = "TEST.EDF"
+    el_tracker.openDataFile(edf_file_name)
+    preamble_text = 'RECORDED BY %s' % os.path.basename(__file__)
+    el_tracker.sendCommand("add_file_preamble_text '%s'" % preamble_text)
+
+def setup_tracker_options(el_tracker):
+    """Sets up tracking, recording, and calibration options."""
+    el_tracker.setOfflineMode()
+    pix_msg = "screen_pixel_coords 0 0 %d %d" % (SCN_WIDTH - 1, SCN_HEIGHT - 1)
+    el_tracker.sendCommand(pix_msg)
+    el_tracker.sendCommand("calibration_type = HV9")
+    el_tracker.sendCommand("file_event_filter = LEFT,RIGHT,FIXATION,SACCADE,BLINK,MESSAGE,BUTTON,INPUT")
+    el_tracker.sendCommand("file_sample_data = GAZE,GAZERES,HREF,AREA,STATUS,INPUT")
+
+def calibrate_tracker(el_tracker):
+    """Performs the initial calibration of the tracker."""
     el_tracker.doTrackerSetup()
+
+def setup_eye_tracker():
+    # Step 1: Initialize the EyeLink tracker
+    root = tk.Tk()
+    el_tracker = initialize_tracker()
+
+    # Step 2: Initialize display-side graphics
+    setup_display(el_tracker)
+
+    # Step 3: Initialize data file
+    setup_data_file(el_tracker)
+
+    # Step 4: Set up tracker options
+    setup_tracker_options(el_tracker)
+
+    # Step 5: Perform initial calibration
+    calibrate_tracker(el_tracker)
+    
+    root.bind('<Escape>', on_escape)
+    return el_tracker
+
+
+def main():
+    el_tracker = setup_eye_tracker()
+    
     # Do it from scratch --> neeed you to calibate and validate, Get all the set-up 
     # then you only need to run the trials during the experiment
     # clean up and store the output once the experimetnt is done 
     # Lets get some output!!!!
 
+
+    # once the caligration is done 
     Experiment_Permutation = int(input("Input the experiment permutation: "))
     Participant_ID = input("Input the participant ID: ")
-
-    # Experiment_Results\E1_A\ExperimentPermuation1_ParticipantA_Input.csv
 
     Input_File_Path = f'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}_Input.csv'
 
