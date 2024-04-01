@@ -666,6 +666,7 @@ def main():
     both_screen(data_dictionary, el_tracker)
 
     close_eye_tracker(el_tracker)
+    sys.exit()
 
 
 if __name__ == "__main__":
