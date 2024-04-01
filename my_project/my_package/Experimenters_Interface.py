@@ -72,13 +72,37 @@ class Experimenters_Interface:
         times_list =self.controller.get_all_times()
         is_correct = (expected == recorded) or (expected == override)
         is_perfect = is_correct and not self.is_error
-        MainLog = [Experiment_Permutation, Participant_ID, self.controller.get_counter(), 
-                   name_of_task, task_information[InputFileIndexes.Topic_Index], task_information[InputFileIndexes.Condition_Index],
-                     task_information[InputFileIndexes.Task_Index], task_information[InputFileIndexes.Repetition_Index], 
-                     task_information[InputFileIndexes.Table_PNG_Index], task_information[InputFileIndexes.Table_Rendering_Index], 
-                     times_list[0], times_list[1], times_list[2], times_list[3], times_list[5], times_list[4], 
-                     recorded, task_information[InputFileIndexes.Task_Column_Index], task_information[InputFileIndexes.Task_Answer_Col_Row_Index],
-                     expected, task_information[InputFileIndexes.Task_Answer_Col_Row_Index], str(self.is_error), is_perfect, str(is_correct)]
+        MainLog = [Experiment_Permutation, 
+                   Participant_ID, 
+                   self.controller.get_counter(), 
+                   name_of_task, 
+                   task_information[InputFileIndexes.Task_Type_Index], 
+                   task_information[InputFileIndexes.Table_PNG_Index],
+                   task_information[InputFileIndexes.Table_Rendering_Index],
+                   task_information[InputFileIndexes.Dataset_Number_Index], 
+                   task_information[InputFileIndexes.Topic_Index ], 
+                   task_information[InputFileIndexes.Condition_Index],
+                   task_information[InputFileIndexes.Repetition_Index], 
+                   task_information[InputFileIndexes.Task_Index],
+                   task_information[InputFileIndexes.Task_Header_Index],
+                   task_information[InputFileIndexes.Task_Column_Index], 
+                   task_information[InputFileIndexes.Task_Par1_Index],
+                   task_information[InputFileIndexes.Task_Prompt_Index],
+                   task_information[InputFileIndexes.Task_Expected_Index],
+                   task_information[InputFileIndexes.Task_Answer_Col_Row_Index],      
+                   times_list[0], 
+                   times_list[1], 
+                   times_list[2], 
+                   times_list[3], 
+                   times_list[5], 
+                   times_list[4],
+                   recorded, 
+                   str(self.is_error),
+                   str(is_perfect), 
+                   str(is_correct)
+                   ]
+        
+        
         with open(OutputFilePaths.mainlog_file, 'a', newline='') as f:
             csv.writer(f).writerow(MainLog)
         self.saved_label.config(text=f"Saved: Expected: {expected}, Recorded: {recorded}, Correct: {is_correct}: Error: {self.is_error}")
