@@ -12,6 +12,7 @@ from datetime import datetime
 """
 
 class ExperimentConstants:
+    font_size = 32
     Introduction = "Thank you for participating in this experiment.\nPlease be patient and wait for the experimenter."
     Prompt = "\nPress the space bar as soon as you have found the answer and say the number out loud."
     Progress = "\nPlease do not use the mouse or keyboard\nAfter the experientor has finished recording your answer,\nyou will be able to proceed to the next task by pressing the space bar"
@@ -44,8 +45,8 @@ task_information = [InputFileIndexes.Task_Type_Index, InputFileIndexes.Table_PNG
                     InputFileIndexes.Task_Prompt_Index, InputFileIndexes.Task_Expected_Index, InputFileIndexes.Task_Answer_Col_Row_Index]
 
 class InputFilePaths:
-    Task_CSV_Path = f'./Experiment_Data/Task_Answers_CSV/{task_information[InputFileIndexes.Task_Type_Index]}/{task_information[InputFileIndexes.Task_Type_Index]}.csv'
-    Table_PNG_Path = f'{task_information[InputFileIndexes.Table_PNG_Index]}'
+    Task_CSV_Path = f'../Experiment_Data/Task_Answers_CSV/{task_information[InputFileIndexes.Task_Type_Index]}/{task_information[InputFileIndexes.Task_Type_Index]}.csv'
+    Table_PNG_Path = f'./{task_information[InputFileIndexes.Table_PNG_Index]}'
 
 # Experient Case
 Experiment_Permutation = 1
@@ -55,10 +56,10 @@ Participant_ID = 'A'
 Date_and_Time = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
 class OutputFilePaths:
-    mainlog_file = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/Mainlog_Experiment{Experiment_Permutation}_Participant{Participant_ID}_{Date_and_Time}.csv'
-    mouse_log_path = F'./Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/mouse_logs_EP{Experiment_Permutation}_P{Participant_ID}_/'
-    gaze_log = "./gaze_log.csv"
-    fixation_log = "./fixation_log.csv"
+    mainlog_file = F'../Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/Mainlog_Experiment{Experiment_Permutation}_Participant{Participant_ID}_{Date_and_Time}.csv'
+    mouse_log_path = F'../Experiment_Results/Experiment_permutation_{Experiment_Permutation}_participant_{Participant_ID}/EP{Experiment_Permutation}_P{Participant_ID}_Results/mouse_logs_EP{Experiment_Permutation}_P{Participant_ID}_/'
+    gaze_log = "../gaze_log.csv"
+    fixation_log = "../fixation_log.csv"
 
 class MainlogIndexes:
     Experiment_permutation_Index = 0 # Experiment_permutation
@@ -85,6 +86,3 @@ class MainlogIndexes:
     error_Index = 21 # False or True: button to set false in experimentors GUI
     Is_Perfect_Index = 22 # recored answer collected all data, can proceed to next task
     Is_correct_Index = 23 # True or False: whether the recorded answer was correct
-
-class ParticipantConstants:
-    font_size = 32

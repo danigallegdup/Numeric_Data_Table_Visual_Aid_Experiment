@@ -6,8 +6,9 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from datetime import datetime
 
-from .Controller import Controller
-
+from .Controller import *
+from .Constants import *
+from .Experimenters_Interface import *
 class Participants_Interface:
     def __init__(self, root, data_dictionary, controller):
        
@@ -35,28 +36,28 @@ class Participants_Interface:
         self.root.bind('<space>', self.update_screen)
 
     def display_intro_text(self):
-        self.picture_label.config(text=Introduction, image='', font=("Helvetica", font_size), padx=10, pady=10)
+        self.picture_label.config(text=ExperimentConstants.Introduction, image='', font=("Helvetica", ExperimentConstants.font_size), padx=10, pady=10)
 
     def display_thank_you(self):
-        self.picture_label.config(text=Thank_You, image='', font=("Helvetica", font_size), padx=10, pady=10)
+        self.picture_label.config(text=ExperimentConstants.Thank_You, image='', font=("Helvetica", ExperimentConstants.font_size), padx=10, pady=10)
 
     def display_prompt(self, task_information):
-        message = f"{task_information[Task_Prompt_Index]} \n{Prompt} "
-        self.picture_label.config(text=message, image='', font=("Helvetica", font_size), padx=10, pady=10)
+        message = f"{task_information[InputFileIndexes.Task_Prompt_Index]} \n{ExperimentConstants.Prompt} "
+        self.picture_label.config(text=message, image='', font=("Helvetica", ExperimentConstants.font_size), padx=10, pady=10)
 
     def display_table(self, task_information):
         self.controller.set_start_time_milliseconds(time.time() * 1000)
-        img = Image.open(task_information[Table_PNG_Index])
+        img = Image.open(task_information[InputFileIndexes.Table_PNG_Index])
         img = img.resize((self.screen_width, self.screen_height), Image.LANCZOS)
         self.photo = ImageTk.PhotoImage(img)
         self.picture_label.config(image=self.photo, text='')
 
     def display_progress(self):
         self.controller.set_end_time_milliseconds(time.time() * 1000)
-        progress_text = f"Completed {self.controller.get_counter()+1} out of 80 tasks" + "\n" + Progress
+        progress_text = f"Completed {self.controller.get_counter()+1} out of 80 tasks" + "\n" + ExperimentConstants.Progress
         if(self.controller.get_counter()+1 % 16==0 and self.controller.get_counter() >1):
-            progress_text = progress_text + "\n\n" + Next_task
-        self.picture_label.config(text=progress_text, image='', font=("Helvetica", font_size), padx=10, pady=10)
+            progress_text = progress_text + "\n\n" + ExperimentConstants.Next_task
+        self.picture_label.config(text=progress_text, image='', font=("Helvetica", ExperimentConstants.font_size), padx=10, pady=10)
 
     def update_screen(self, event=None):
         if self.previous_counter < self.controller.get_counter():

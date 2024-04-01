@@ -6,10 +6,10 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from datetime import datetime
 
-from my_package import Constants
-from my_package import Participants_Interface
-from my_package import Experimenters_Interface
-from my_package import Controller
+from my_package.Constants import *
+from my_package.Participants_Interface import *
+from my_package.Experimenters_Interface import *
+from my_package.Controller import *
 
 
 # Function to convert CSV file to a dictionary
@@ -33,7 +33,7 @@ def start_mainlog():
                   "Recorded_row_col", "Expected_Answer", "Expected_Answer_row_col", 
                   "error", "isPerfect", "Is_correct")
 
-    with open(Constants.OutputFilePaths.mainlog_file, 'w', newline='') as f:
+    with open(OutputFilePaths.mainlog_file, 'w', newline='') as f:
         csv.writer(f).writerow(variable_names)
 
 def both_screen(data_dictionary):

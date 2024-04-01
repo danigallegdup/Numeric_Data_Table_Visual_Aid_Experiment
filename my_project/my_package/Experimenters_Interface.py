@@ -6,9 +6,9 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from datetime import datetime
 
-from .Constants import ExperimentConstants, ExperientCase, InputFileIndexes, Experiment_Permutation, Participant_ID, mainlog_file
-from .Controller import Controller
-
+from .Constants import *
+from .Controller import *
+from .Participants_Interface import *
 
 class Experimenters_Interface:
     def __init__(self, root, data_dictionary, controller):
@@ -79,7 +79,7 @@ class Experimenters_Interface:
                      times_list[0], times_list[1], times_list[2], times_list[3], times_list[5], times_list[4], 
                      recorded, task_information[InputFileIndexes.Task_Column_Index], task_information[InputFileIndexes.Task_Answer_Col_Row_Index],
                      expected, task_information[InputFileIndexes.Task_Answer_Col_Row_Index], str(self.is_error), is_perfect, str(is_correct)]
-        with open(mainlog_file, 'a', newline='') as f:
+        with open(OutputFilePaths.mainlog_file, 'a', newline='') as f:
             csv.writer(f).writerow(MainLog)
         self.saved_label.config(text=f"Saved: Expected: {expected}, Recorded: {recorded}, Correct: {is_correct}: Error: {self.is_error}")
 
