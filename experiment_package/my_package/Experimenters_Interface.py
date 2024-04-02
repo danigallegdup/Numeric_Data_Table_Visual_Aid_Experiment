@@ -165,7 +165,7 @@ class Experimenters_Interface:
         save_button_command = lambda: self.save_answer(expected_var.get(), override_entry.get() or recorded_var.get(), override_entry.get(),task_information, name_of_task)
         self.create_button(bottom_frame, "Save", save_button_command, 4, 0, columnspan=2)
        
-        self.saved_label = self.create_label(bottom_frame, "Shows what was saved:", 5, 0)
+        self.saved_label = self.create_label(bottom_frame, "Shows what was saved:", 6,3 )
 
         self.Set_Error_False()
         self.create_button(bottom_frame, "Next Task", self.next_task, 4, 6, columnspan=2)

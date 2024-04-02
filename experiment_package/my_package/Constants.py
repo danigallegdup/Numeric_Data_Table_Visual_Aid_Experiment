@@ -12,11 +12,11 @@ from datetime import datetime
 """
 
 class ExperimentConstants:
-    font_size = 32
-    Introduction = "Thank you for participating in this experiment.\nPlease be patient and wait for the experimenter."
-    Prompt = "\nPress the space bar as soon as you have found the answer and say the number out loud."
-    Progress = "\nPlease do not use the mouse or keyboard\nAfter the experientor has finished recording your answer,\nyou will be able to proceed to the next task by pressing the space bar"
-    Next_task = "You have finished all the conditions for this task!\nPlease take the survey that the experimentor will hand to you\n.You might want to take a short break before starting the next task."
+    font_size = 20
+    Introduction = "Thank you for participating in this experiment.\nWhen you are and the experimenter are ready,\npress the space bar to navigate to the next screen."
+    Prompt = "\nWhen you start performing the task, mouse movement, eye tracking, and timer will be initated.\nAs soon as you finish the task proceed to the next screen before saying your answer to the experimenter.\nWhen you are ready to perform the task press the space bar"
+    Progress = "\nPlease do not use the mouse or keyboard.\nAfter the experimenter has finished recording your answer,\nyou will be able to proceed to the next task by pressing the space bar"
+    Next_task = "You have finished all the conditions for this task!\nPlease fill out the survey that the experimentor will hand to you\n.You might want to take a short break before starting the next task."
     Thank_You = "Thank you for participating in this experiment.\nPlease remain in your seat and for your wait experimenter's response."
 
 class ExperientCase:
