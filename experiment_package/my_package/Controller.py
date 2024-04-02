@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from datetime import datetime
+import os
 
 from my_package.Constants import OutputFilePaths, InputFileIndexes, task_information
 
@@ -14,12 +15,13 @@ class Controller:
         # INDEXES FOR BOTH GUI'S TO STAY IN SYNC
         self.current_index = -1
         self.experimentor_is_ready = False
+        self.name_of_task = None
         
         # MOUSE
         self.mouse_log_enabled = False
         self.mouse_log = []
         self.mouse_log_thread = None
-
+        
         # TIMERS
         self.start_task_milliseconds = None # When the Participants sees the prompt screen (when the task started)
         self.start_time_milliseconds = None # when paticipants sees the stimulous -- table
@@ -80,11 +82,12 @@ class Controller:
     
 # mouse logs
 
-    def start_mouse_logging(self):
+    def start_mouse_logging(self, name_of_task):
         self.mouse_log_enabled = True
         self.mouse_log = []
         self.mouse_log_thread = threading.Thread(target=self.log_mouse_position)
         self.mouse_log_thread.start()
+        self.name_of_task = name_of_task
 
     def stop_mouse_logging(self):
         self.mouse_log_enabled = False
@@ -101,7 +104,12 @@ class Controller:
 
     def save_mouse_log(self):
         # Ensure the directory exists
-        filename = OutputFilePaths.mouse_log_path + f"mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        filename = OutputFilePaths.mouse_log_path + self.name_of_task + f"-mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        directory = os.path.dirname(filename)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["Timestamp", "X", "Y"])

@@ -77,7 +77,7 @@ class Participants_Interface:
         elif self.state == 0:
             self.display_prompt(task_information)
         elif self.state == 1:
-            self.controller.start_mouse_logging()
+            self.controller.start_mouse_logging( name_of_task)
             self.display_table(task_information)
         elif self.state == 2:
             self.controller.stop_mouse_logging()
