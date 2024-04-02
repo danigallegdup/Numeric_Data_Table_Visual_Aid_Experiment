@@ -55,7 +55,7 @@ class Participants_Interface:
     def display_progress(self):
         self.controller.set_end_time_milliseconds(time.time() * 1000)
         progress_text = f"Completed {self.controller.get_counter()+1} out of 80 tasks" + "\n" + ExperimentConstants.Progress
-        if(self.controller.get_counter()+1 % 16==0 and self.controller.get_counter() >1):
+        if self.controller.get_counter()== 15 or self.controller.get_counter()== 31 or self.controller.get_counter()== 47 or self.controller.get_counter()== 63:
             progress_text = progress_text + "\n\n" + ExperimentConstants.Next_task
         self.picture_label.config(text=progress_text, image='', font=("Helvetica", ExperimentConstants.font_size), padx=10, pady=10)
 
