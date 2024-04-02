@@ -64,7 +64,6 @@ class Experimenters_Interface:
 
         self.next_task()  # Start the first task    
 
-
     def Set_Error_True(self):
         self.is_error= True
 
@@ -162,7 +161,6 @@ class Experimenters_Interface:
         picture_label.image = photo  # Keep a reference
         picture_label.pack()
 
-
     def create_label(self, frame, text, row, column):
         label = tk.Label(frame, text=text)
         label.grid(row=row, column=column)
@@ -217,7 +215,6 @@ class Experimenters_Interface:
         self.Set_Error_False()
         self.create_button(bottom_frame, "Next Task", self.next_task, 4, 3, columnspan=2)
         
-
     def task3_setup_gui(self,name_of_task,task_information):
         self.clear_frame(self.left_frame)
         self.clear_frame(self.right_frame)
@@ -231,8 +228,7 @@ class Experimenters_Interface:
         self.load_csv_and_create_buttons(self.left_frame, file_path, recorded_var)
         self.create_label_and_picture(self.right_frame, task_information)
         self.task3_create_bottom_section(task_information, self.bottom_frame, recorded_var)  # Pass recorded_var to create_bottom_section
-    
-     
+         
     def create_expected_answer(self, bottom_frame, task_information):
         expected_label = tk.Label(bottom_frame, text="Expected Answer:")
         expected_label.grid(row=0, column=0)
