@@ -10,6 +10,32 @@ from .Constants import *
 from .Controller import *
 from .Participants_Interface import *
 
+class ScrollableFrame(tk.Frame):
+    def __init__(self, container, *args, **kwargs):
+        super().__init__(container, *args, **kwargs)
+        canvas = tk.Canvas(self)
+        v_scrollbar = tk.Scrollbar(self, orient="vertical", command=canvas.yview)
+        h_scrollbar = tk.Scrollbar(self, orient="horizontal", command=canvas.xview)  # New horizontal scrollbar
+        self.scrollable_frame = tk.Frame(canvas)
+
+        self.scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+
+        canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=v_scrollbar.set, xscrollcommand=h_scrollbar.set)  # Configure the horizontal scrollbar
+
+        canvas.grid(row=0, column=0, sticky="nsew")
+        v_scrollbar.grid(row=0, column=1, sticky="ns")
+        h_scrollbar.grid(row=1, column=0, sticky="ew")  # Place the horizontal scrollbar
+
+        # Configure the grid layout to make the canvas expandable
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+
+
 class Experimenters_Interface:
     def __init__(self, root, data_dictionary, controller):
         self.root = root
@@ -17,7 +43,12 @@ class Experimenters_Interface:
         self.keys_list = list(data_dictionary.keys())
         self.controller = controller
         self.saved_label = None
-        
+        self.scrollable_frame = ScrollableFrame(self.root)
+
+        self.left_frame = ScrollableFrame(self.root)
+        self.right_frame = ScrollableFrame(self.root)
+        self.bottom_frame = ScrollableFrame(self.root)
+
         self.left_frame = self.create_frame(self.root, 850, 600)
         self.right_frame = self.create_frame(self.root, 850, 400)
         self.bottom_frame = self.create_frame(self.root, 1700, 200)
@@ -105,14 +136,21 @@ class Experimenters_Interface:
         
         with open(OutputFilePaths.mainlog_file, 'a', newline='') as f:
             csv.writer(f).writerow(MainLog)
-        self.saved_label.config(text=f"Saved: Expected: {expected}, Recorded: {recorded}, Correct: {is_correct}: Error: {self.is_error}")
-
+        if task_information[InputFileIndexes.Task_Type_Index] !='3':
+            self.saved_label.config(text=f"Saved: Expected: {expected}, Recorded: {recorded}, Correct: {is_correct}: Error: {self.is_error}")
+        else:
+            self.saved_label.config(text=f"Saved!")
+    
     def load_csv_and_create_buttons(self, frame, file_path, recorded_var):
         csv_values = self.load_csv_content(file_path)
         for i, row in enumerate(csv_values):
             for j, value in enumerate(row):
+                # Calculate the new row and column indices
+                new_row = i % 15
+                new_col = j * 2 + i // 15
+
                 button = ttk.Button(frame, text=value, command=lambda v=value: recorded_var.set(v))
-                button.grid(row=i, column=j)
+                button.grid(row=new_row, column=new_col)
 
     def create_label_and_picture(self, frame, task_information):
         prompt_label = tk.Label(frame, text=task_information[InputFileIndexes.Task_Prompt_Index])
@@ -142,20 +180,29 @@ class Experimenters_Interface:
     def task3_create_bottom_section(self, task_information, bottom_frame, recorded_var):
         self.create_label(bottom_frame, "Recorded Answers:", 0, 0)
 
-        _, recorded_var1 = self.create_entry(bottom_frame, textvariable=tk.StringVar(), width=30, row=0, column=1)
-        _, recorded_var2 = self.create_entry(bottom_frame, textvariable=tk.StringVar(), width=30, row=0, column=2)
-        _, recorded_var3 = self.create_entry(bottom_frame, textvariable=tk.StringVar(), width=30, row=0, column=3)
+        _, recorded_var1 = self.create_entry(bottom_frame, textvariable=tk.StringVar(), width=20, row=0, column=1)
+        _, recorded_var2 = self.create_entry(bottom_frame, textvariable=tk.StringVar(), width=20, row=0, column=2)
+        _, recorded_var3 = self.create_entry(bottom_frame, textvariable=tk.StringVar(), width=20, row=0, column=3)
 
+        add_recorded_var1 = lambda: recorded_var1.set(recorded_var.get())
+        add_recorded_var2 = lambda: recorded_var2.set(recorded_var.get())
+        add_recorded_var3 = lambda: recorded_var3.set(recorded_var.get())
         button_command = lambda: recorded_var.set('-'.join([recorded_var1.get(), recorded_var2.get(), recorded_var3.get()]))
-        self.create_button(bottom_frame, "Concatenate", button_command, 1, 0)
 
-        self.create_entry(bottom_frame, textvariable=recorded_var, width=100, row=1, column=1)
+        self.create_button(bottom_frame, "Concatenate", button_command, 1, 0)
+        self.create_entry(bottom_frame, textvariable=recorded_var, width=70, row=1, column=1)
+
+        self.create_button(bottom_frame, "set 1", add_recorded_var1, 1, 2)
+        self.create_button(bottom_frame, "set 2", add_recorded_var2, 1, 3)
+        self.create_button(bottom_frame, "set 3", add_recorded_var3, 1, 4)
+     
+
 
         self.create_label(bottom_frame, "Expected Answer:", 2, 0)
-        _, expected_var = self.create_entry(bottom_frame, textvariable=tk.StringVar(value=task_information[InputFileIndexes.Task_Expected_Index]), state='readonly', width=100, row=2, column=1)
+        _, expected_var = self.create_entry(bottom_frame, textvariable=tk.StringVar(value=task_information[InputFileIndexes.Task_Expected_Index]), state='readonly', width=70, row=2, column=1)
 
         self.create_label(bottom_frame, "Override Answer:", 3, 0)
-        override_entry, _ = self.create_entry(bottom_frame, width=100, row=3, column=1)
+        override_entry, _ = self.create_entry(bottom_frame, width=70, row=3, column=1)
 
         error_button = ttk.Button(bottom_frame, text="Error", command=self.Set_Error_True)
         error_button.grid(row=4, column=2)
@@ -165,10 +212,10 @@ class Experimenters_Interface:
         save_button_command = lambda: self.save_answer(expected_var.get(), override_entry.get() or recorded_var.get(), override_entry.get(),task_information, name_of_task)
         self.create_button(bottom_frame, "Save", save_button_command, 4, 0, columnspan=2)
        
-        self.saved_label = self.create_label(bottom_frame, "Shows what was saved:", 6,3 )
+        self.saved_label = self.create_label(bottom_frame, "not saved", 5, 0)
 
         self.Set_Error_False()
-        self.create_button(bottom_frame, "Next Task", self.next_task, 4, 6, columnspan=2)
+        self.create_button(bottom_frame, "Next Task", self.next_task, 4, 3, columnspan=2)
         
 
     def task3_setup_gui(self,name_of_task,task_information):
