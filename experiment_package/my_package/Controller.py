@@ -63,7 +63,8 @@ class Controller:
 
     def update_counter(self):
         if(self.experimentor_is_ready):
-            self.current_index = (self.current_index + 1)
+            if self.current_index <80: # 80 tasks
+                self.current_index = (self.current_index + 1)
             print( self.current_index)
             self.experimentor_is_ready = False
         else:
