@@ -8,14 +8,19 @@ from PIL import Image, ImageTk
 from datetime import datetime
 import os
 
-from my_package.Constants import OutputFilePaths, InputFileIndexes, task_information
+from .Constants import *
+from .eyetracker import *
+
 
 class Controller:
-    def __init__(self):
+    def __init__(self, eye_tracker):
         # INDEXES FOR BOTH GUI'S TO STAY IN SYNC
         self.current_index = -1
         self.experimentor_is_ready = False
         self.name_of_task = None
+
+        # EYE TRACKER
+        self.eye_tracker = eye_tracker
         
         # MOUSE
         self.mouse_log_enabled = False
@@ -33,6 +38,29 @@ class Controller:
         # EYE TRACKER DATA
         self.fixation_log = []
         self.saccade_log = []
+
+# Eye Tracker
+    def start_tracking(self):
+        # Start recording samples and events
+        error = self.el_tracker.startRecording(1, 1, 1, 1)
+        if error:
+            return error
+
+        # Begin real-time mode
+        pylink.beginRealTimeMode(100)
+    
+    def stop_and_store_tracking(self):
+
+        # get the currently active tracker object (connection)
+        el_tracker = pylink.getEYELINK()
+
+        pylink.endRealTimeMode()
+        pylink.pumpDelay(100)
+        el_tracker.stopRecording()
+
+        while el_tracker.getkey():
+            pass  
+
 
 # timers
 

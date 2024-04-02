@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import print_function
+
 import csv
 import threading
 import time
@@ -5,7 +8,10 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from datetime import datetime
+
 import sys
+import os
+import pylink
 
 """
 Writen by: Daniela Gallegos Dupuis
@@ -16,6 +22,7 @@ from my_package.Constants import *
 from my_package.Participants_Interface import *
 from my_package.Experimenters_Interface import *
 from my_package.Controller import *
+from my_package.eyetracker import *
 
 
 # Function to convert CSV file to a dictionary
@@ -42,9 +49,9 @@ def start_mainlog():
     with open(OutputFilePaths.mainlog_file, 'w', newline='') as f:
         csv.writer(f).writerow(variable_names)
 
-def both_screen(data_dictionary):
+def both_screen(data_dictionary, eye_tracker):
     start_mainlog()
-    controller = Controller()
+    controller = Controller(eye_tracker)
 
     root = tk.Tk()
     root.geometry("1700x900")
@@ -57,6 +64,9 @@ def both_screen(data_dictionary):
     root.mainloop()
 
 if __name__ == "__main__":
+    eye_tracker = EyeTracker()
+    eye_tracker.setup()
+    
     Experiment_Permutation = int(input("Input the experiment permutation: "))
     Participant_ID = input("Input the participant ID: ")
 
@@ -65,6 +75,7 @@ if __name__ == "__main__":
     Input_File_Path = f'./Results/EP{Experiment_Permutation}_P{Participant_ID}/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}_Input.csv'
 
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
-    both_screen(data_dictionary)
+    both_screen(data_dictionary, eye_tracker)
+    eye_tracker.close()
     sys.exit()
    
