@@ -639,7 +639,7 @@ def close_eye_tracker(el_tracker):
         el_tracker.closeDataFile()
 
         results_folder = 'results'
-        edf_file_name = "TEST.EDF"
+        edf_file_name = "1.EDF"
 
 
         # transfer the edf file to the Display PC and rename it
