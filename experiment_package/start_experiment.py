@@ -5,12 +5,6 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from datetime import datetime
-import sys
-
-"""
-Writen by: Daniela Gallegos Dupuis
-
-"""
 
 from my_package.Constants import *
 from my_package.Participants_Interface import *
@@ -19,7 +13,7 @@ from my_package.Controller import *
 
 
 # Function to convert CSV file to a dictionary
-def csv_to_row_dict(csv_file_path: str) -> dict:
+def csv_to_row_dict(csv_file_path):
     """Converts a CSV file into a dictionary with custom keys."""
     row_dict = {}
     with open(csv_file_path, newline='') as csvfile:
@@ -32,12 +26,12 @@ def csv_to_row_dict(csv_file_path: str) -> dict:
     return row_dict       
 
 def start_mainlog():
-    variable_names = ("Experiment_permutation", "participant_ID", "Task_Trial",
-                  "Name_of_Task", "Task_Type", "Table_PNG", "Table_Rendering", "Dataset_Number",
-                  "Topic", "Condition", "Repetition", "Task" ,  "Task_Header", "Task_Column", "Task_Par1",
-                  "Task_Prompt", "Task_Expected_Answer", "Task_Answer_Col_Row", 
-                  "Start_time", "End_time", "Start_time_e", "End_time_e", "Start_time_Prompt", "Time_Spent",
-                 "Recorded_Answer", "IsError", "IsPerfect", "IsCorrect")
+    variable_names = ("Experiment_permutation", "participant_ID", "Task_iteration",
+                  "name_of_task", "Topic", "Condition", "Task", "Repetition",
+                  "table_png", "table_rendering", "start_time", "end_time", "start_time_e",
+                  "end_time_e", "start_time_t", "time_spent", "Recorded_Answer", "Prompt_col",
+                  "Recorded_row_col", "Expected_Answer", "Expected_Answer_row_col", 
+                  "error", "isPerfect", "Is_correct")
 
     with open(OutputFilePaths.mainlog_file, 'w', newline='') as f:
         csv.writer(f).writerow(variable_names)
@@ -50,6 +44,7 @@ def both_screen(data_dictionary):
     root.geometry("1700x900")
     Experimenters_Interface(root, data_dictionary, controller)
 
+    top = tk.Tk()
     top = tk.Toplevel(root)
     top.attributes("-fullscreen", True)
     Participants_Interface(top, data_dictionary, controller)
@@ -66,5 +61,4 @@ if __name__ == "__main__":
 
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
     both_screen(data_dictionary)
-    sys.exit()
    
