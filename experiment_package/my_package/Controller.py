@@ -46,7 +46,8 @@ class Controller:
         el_tracker = self.eye_tracker.get_tracker()
         self.track_message = name_of_task
         el_tracker.sendMessage(self.track_message)
-        image_of_stimuli = f"!V IMGLOAD FILL "+ table_image
+        #./Tables_PNG/DS1_anime_bar1.png
+        image_of_stimuli = f"!V IMGLOAD FILL "+ "/Tables_PNG/DS1_anime_bar1.png"
         el_tracker.sendMessage(image_of_stimuli)
         print(name_of_task)
     
