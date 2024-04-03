@@ -47,7 +47,14 @@ class Controller:
         self.track_message = name_of_task
         el_tracker.sendMessage(self.track_message)
         #./Tables_PNG/DS1_anime_bar1.png
-        image_of_stimuli = f"!V IMGLOAD FILL "+ "/Tables_PNG/DS1_anime_bar1.png"
+        
+        # WIRTE a python snippet that strims this file path
+        # CHANGE THIS ./Experiment_Data/Tables_PNG//DS6_cereal_zebra2.png
+        # TO THIS: /DS6_cereal_zebra2.png
+
+        stripped_table_image =  "/" + table_image.split("/")[-1]
+
+        image_of_stimuli = f"!V IMGLOAD FILL "+ "/Tables_PNG"+ stripped_table_image 
         el_tracker.sendMessage(image_of_stimuli)
         print(name_of_task)
     
