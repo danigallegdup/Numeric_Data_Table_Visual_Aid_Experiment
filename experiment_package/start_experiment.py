@@ -69,13 +69,15 @@ if __name__ == "__main__":
     
     Experiment_Permutation = int(input("Input the experiment permutation: "))
     Participant_ID = input("Input the participant ID: ")
-
+   
     # Experiment_Results\E1_A\ExperimentPermuation1_ParticipantA_Input.csv
 
     Input_File_Path = f'./Results/EP{Experiment_Permutation}_P{Participant_ID}/ExperimentPermuation{Experiment_Permutation}_Participant{Participant_ID}_Input.csv'
-
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
+    
     both_screen(data_dictionary, eye_tracker)
+    
+    
     eye_tracker.close_eye_tracker()
     sys.exit()
    

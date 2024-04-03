@@ -42,24 +42,10 @@ class Controller:
 # Eye Tracker
     def start_tracking(self):
         # Start recording samples and events
-        error = self.el_tracker.startRecording(1, 1, 1, 1)
-        if error:
-            return error
-
-        # Begin real-time mode
-        pylink.beginRealTimeMode(100)
+        self.eye_tracker.start_tracking()
     
     def stop_and_store_tracking(self):
-
-        # get the currently active tracker object (connection)
-        el_tracker = pylink.getEYELINK()
-
-        pylink.endRealTimeMode()
-        pylink.pumpDelay(100)
-        el_tracker.stopRecording()
-
-        while el_tracker.getkey():
-            pass  
+        self.eye_tracker.stop_tracking()
 
 
 # timers
