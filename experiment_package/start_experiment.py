@@ -65,7 +65,7 @@ def both_screen(data_dictionary, eye_tracker):
 
 if __name__ == "__main__":
     eye_tracker = EyeTracker()
-    eye_tracker.setup()
+    eye_tracker.initialize_tracker()
     
     Experiment_Permutation = int(input("Input the experiment permutation: "))
     Participant_ID = input("Input the participant ID: ")
@@ -76,6 +76,6 @@ if __name__ == "__main__":
 
     data_dictionary = csv_to_row_dict(Input_File_Path)  # Convert CSV to dictionary
     both_screen(data_dictionary, eye_tracker)
-    eye_tracker.close()
+    eye_tracker.close_eye_tracker()
     sys.exit()
    

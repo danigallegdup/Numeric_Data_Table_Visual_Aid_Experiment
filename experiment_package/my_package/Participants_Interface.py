@@ -11,7 +11,7 @@ from .Constants import *
 from .Experimenters_Interface import *
 class Participants_Interface:
     def __init__(self, root, data_dictionary, controller):
-       
+
         self.controller = controller
         self.root = root
         self.keys_list = list(data_dictionary.keys())
@@ -77,9 +77,11 @@ class Participants_Interface:
         elif self.state == 0:
             self.display_prompt(task_information)
         elif self.state == 1:
+            self.controller.start_tracking()
             self.controller.start_mouse_logging( name_of_task)
             self.display_table(task_information)
         elif self.state == 2:
+            self.controller.stop_and_store_tracking()
             self.controller.stop_mouse_logging()
             self.display_progress()
             self.can_progress = False

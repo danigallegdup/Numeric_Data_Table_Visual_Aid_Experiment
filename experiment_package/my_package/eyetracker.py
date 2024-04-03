@@ -19,17 +19,13 @@ from .Experimenters_Interface import *
 
 # Dummy mode flag - set to True if no real tracker is connected
 dummy_mode = False
+edf_file_name = "1.EDF"
 
 class EyeTracker:
-    SCN_WIDTH = 1920
-    SCN_HEIGHT = 1080
-
     def __init__(self):
-        self.dummy_mode = dummy_mode
         self.el_tracker = None
-
-    def on_escape(self, event=None):
-        pylink.closeGraphics()
+        self.dummy_mode = False
+        self.edf_file_name = "1.EDF"
 
     def initialize_tracker(self):
         if self.dummy_mode:
@@ -41,47 +37,34 @@ class EyeTracker:
             except RuntimeError as error:
                 print('ERROR:', error)
                 sys.exit()
-
-    def setup_display(self):
-        pylink.openGraphics((self.SCN_WIDTH, self.SCN_HEIGHT), 32)
+        
 
     def setup_data_file(self):
-        edf_file_name = "TEST.EDF"
-        self.el_tracker.openDataFile(edf_file_name)
+        self.el_tracker.openDataFile(self.edf_file_name)
         preamble_text = 'RECORDED BY %s' % os.path.basename(__file__)
         self.el_tracker.sendCommand("add_file_preamble_text '%s'" % preamble_text)
 
-    def setup_tracker_options(self):
-        self.el_tracker.setOfflineMode()
-        pix_msg = "screen_pixel_coords 0 0 %d %d" % (self.SCN_WIDTH - 1, self.SCN_HEIGHT - 1)
-        self.el_tracker.sendCommand(pix_msg)
-        self.el_tracker.sendCommand("calibration_type = HV9")
-        self.el_tracker.sendCommand("file_event_filter = LEFT,RIGHT,FIXATION,SACCADE,BLINK,MESSAGE,BUTTON,INPUT")
-        self.el_tracker.sendCommand("file_sample_data = GAZE,GAZERES,HREF,AREA,STATUS,INPUT")
 
-    def calibrate_tracker(self):
-        self.el_tracker.doTrackerSetup()
-
-    def setup(self):
-        self.initialize_tracker()
-        self.setup_display()
-        self.setup_data_file()
-        self.setup_tracker_options()
-        self.calibrate_tracker()
-
-    def close(self):
+        # ------- Eye Tracker File Transfer and clean up
+    def close_eye_tracker(self):
+        """Closes the EyeLink tracker."""
+        # Step 7: File transfer and cleanup
         if self.el_tracker is not None:
             self.el_tracker.setOfflineMode()
             pylink.msecDelay(500)
+
+            # Close the edf data file on the Host
             self.el_tracker.closeDataFile()
 
             results_folder = 'results'
-            edf_file_name = "TEST.EDF"
-            local_file_name = os.path.join(results_folder, edf_file_name)
+           
+            # transfer the edf file to the Display PC and rename it
+            local_file_name = os.path.join(results_folder, self.edf_file_name)
 
             try:
                 self.el_tracker.receiveDataFile(edf_file_name, local_file_name)
             except RuntimeError as error:
                 print('ERROR:', error)
 
-            self.el_tracker.close()
+        # Step 8: close EyeLink connection and quit display-side graphics
+        self.el_tracker.close()
