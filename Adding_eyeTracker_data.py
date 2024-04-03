@@ -158,16 +158,16 @@ class Controller:
         pylink.beginRealTimeMode(100)
     
     def stop_and_store_tracking(self):
-
+        pass
         # get the currently active tracker object (connection)
-        el_tracker = pylink.getEYELINK()
+        # el_tracker = pylink.getEYELINK()
 
-        pylink.endRealTimeMode()
-        pylink.pumpDelay(100)
-        el_tracker.stopRecording()
+        # pylink.endRealTimeMode()
+        # pylink.pumpDelay(100)
+        # el_tracker.stopRecording()
 
-        while el_tracker.getkey():
-            pass       
+        # while el_tracker.getkey():
+        #     pass       
         # # End real-time mode
         # pylink.endRealTimeMode()
 
@@ -399,7 +399,7 @@ class Experimenters_Interface:
 
         error_button = ttk.Button(bottom_frame, text="Error", command=self.Set_Error_True)
         error_button.grid(row=4, column=2)
-        print(self.is_error)
+        #print(self.is_error)
 
         name_of_task = self.keys_list[self.controller.get_counter()]
         save_button_command = lambda: self.save_answer(expected_var.get(), override_entry.get() or recorded_var.get(), override_entry.get(),task_information, name_of_task)
@@ -639,7 +639,7 @@ def close_eye_tracker(el_tracker):
         el_tracker.closeDataFile()
 
         results_folder = 'results'
-        edf_file_name = "1.EDF"
+        edf_file_name = "100.edf"
 
 
         # transfer the edf file to the Display PC and rename it
