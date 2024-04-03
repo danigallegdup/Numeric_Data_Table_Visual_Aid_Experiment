@@ -41,16 +41,20 @@ class Controller:
         self.track_message= ""
 
 # Eye Tracker
-    def start_tracking_message(self, name_of_task):
+    def start_tracking_message(self, name_of_task, table_image):
         # Start recording samples and events
         el_tracker = self.eye_tracker.get_tracker()
         self.track_message = name_of_task
         el_tracker.sendMessage(self.track_message)
+        image_of_stimuli = f"!V IMGLOAD FILL "+ table_image
+        el_tracker.sendMessage(image_of_stimuli)
+        print(name_of_task)
     
     def stop_tracking_message(self):
         el_tracker = self.eye_tracker.get_tracker()
         self.track_message = "_" + self.track_message
         el_tracker.sendMessage(self.track_message)
+        print(self.track_message)
 
 
 
