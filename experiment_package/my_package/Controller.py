@@ -38,14 +38,22 @@ class Controller:
         # EYE TRACKER DATA
         self.fixation_log = []
         self.saccade_log = []
+        self.track_message= ""
 
 # Eye Tracker
-    def start_tracking(self):
+    def start_tracking_message(self, name_of_task):
         # Start recording samples and events
-        self.eye_tracker.start_tracking()
+        el_tracker = self.eye_tracker.get_tracker()
+        self.track_message = name_of_task
+        el_tracker.sendMessage(self.track_message)
     
-    def stop_and_store_tracking(self):
-        self.eye_tracker.stop_tracking()
+    def stop_tracking_message(self):
+        el_tracker = self.eye_tracker.get_tracker()
+        self.track_message = "_" + self.track_message
+        el_tracker.sendMessage(self.track_message)
+
+
+
 
 
 # timers

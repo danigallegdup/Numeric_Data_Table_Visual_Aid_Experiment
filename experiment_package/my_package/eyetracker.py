@@ -17,15 +17,13 @@ from .Controller import *
 from .Constants import *
 from .Experimenters_Interface import *
 
-# Dummy mode flag - set to True if no real tracker is connected
-dummy_mode = False
-edf_file_name = "pilot.EDF"
+
 
 class EyeTracker:
     def __init__(self):
         self.el_tracker = None
         self.dummy_mode = False
-        self.edf_file_name = "1.EDF"
+        self.edf_file_name = "pilot1.EDF"
 
     def initialize_tracker(self):
         if self.dummy_mode:
@@ -38,6 +36,7 @@ class EyeTracker:
                 print('ERROR:', error)
                 sys.exit()
         self.setup_data_file()
+        self.start_tracking()
         
 
     def setup_data_file(self):
@@ -47,6 +46,11 @@ class EyeTracker:
 
     def start_tracking(self):
         # Start recording samples and events
+        self.el_tracker.openDataFile(self.edf_file_name)
+        
+        self.el_tracker.setOfflineMode()
+        pylink.pumpDelay(100)
+        
         error = self.el_tracker.startRecording(1, 1, 1, 1)
         if error:
             return error
@@ -54,23 +58,16 @@ class EyeTracker:
         # Begin real-time mode
         pylink.beginRealTimeMode(100)
     
-    def stop_tracking(self):
-
-        # get the currently active tracker object (connection)
-        el_tracker = pylink.getEYELINK()
-
-        pylink.endRealTimeMode()
-        pylink.pumpDelay(100)
-        el_tracker.stopRecording()
-
-        while el_tracker.getkey():
-            pass
+    def get_tracker(self):
+        return self.el_tracker
+    
 
         # ------- Eye Tracker File Transfer and clean up
     def close_eye_tracker(self):
         """Closes the EyeLink tracker."""
         # Step 7: File transfer and cleanup
         if self.el_tracker is not None:
+            self.el_tracker.stopRecording()
             self.el_tracker.setOfflineMode()
             pylink.msecDelay(500)
 
@@ -83,7 +80,7 @@ class EyeTracker:
             local_file_name = os.path.join(results_folder, self.edf_file_name)
 
             try:
-                self.el_tracker.receiveDataFile(edf_file_name, local_file_name)
+                self.el_tracker.receiveDataFile(self.edf_file_name, local_file_name)
             except RuntimeError as error:
                 print('ERROR:', error)
 
