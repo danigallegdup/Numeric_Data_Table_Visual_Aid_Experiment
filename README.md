@@ -4,13 +4,13 @@
 This research experiemnt explores the effectiveness of using visual aids to understand  numeric data tables.
 
 ## Generated Data Tables: 
-![color](./Experiment_Data/Tables_PNG/DS2_anime_color2.png)
+![color](./experiment_package/Experiment_Data/Tables_PNG/DS2_anime_color2.png)
 
-![bar](./Experiment_Data/Tables_PNG/DS12_candy_bar4.png)
+![bar](./experiment_package/Experiment_Data/Tables_PNG/DS12_candy_bar4.png)
 
-![zebra](./Experiment_Data/Tables_PNG/DS6_cereal_zebra2.png)
+![zebra](./experiment_package/Experiment_Data/Tables_PNG/DS6_cereal_zebra2.png)
 
-![plain](./Experiment_Data/Tables_PNG/DS13_movie_plain1.png)
+![plain](./experiment_package/Experiment_Data/Tables_PNG/DS13_movie_plain1.png)
 
 
 ## Shortlisted Data Table Tasks:
