@@ -23,6 +23,7 @@ class Controller:
         self.eye_tracker = eye_tracker
         
         # MOUSE
+        self.mouse_file_name = "" # name of the file to save the mouse log
         self.mouse_log_enabled = False
         self.mouse_log = []
         self.mouse_log_thread = None
@@ -123,6 +124,12 @@ class Controller:
         self.mouse_log_thread = threading.Thread(target=self.log_mouse_position)
         self.mouse_log_thread.start()
         self.name_of_task = name_of_task
+        self.mouse_file_name = OutputFilePaths.mouse_log_path + self.name_of_task + f"-mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        directory = os.path.dirname(self.mouse_file_name)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        
 
     def stop_mouse_logging(self):
         self.mouse_log_enabled = False
@@ -138,14 +145,7 @@ class Controller:
             self.save_mouse_log() # Save log to file
 
     def save_mouse_log(self):
-        # Ensure the directory exists
-        filename = OutputFilePaths.mouse_log_path + self.name_of_task + f"-mouse_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-        directory = os.path.dirname(filename)
-
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-        
-        with open(filename, 'w', newline='') as file:
+        with open(self.mouse_file_name, 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["Timestamp", "X", "Y"])
             for log_entry in self.mouse_log:
