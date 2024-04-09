@@ -269,9 +269,11 @@ def do_trial(trial):
                 # Check if the new sample has data for the eye
                 # currently being tracked,
                 if eye_used == RIGHT_EYE and smp.isRightSample():
-                    sample = smp.getRightEye().getGaze()
+                    gaze = smp.getRightEye().getGaze()
+                    pupil = smp.getRightEye().getPupilSize()
                 elif eye_used != RIGHT_EYE and smp.isLeftSample():
-                    sample = smp.getLeftEye().getGaze()
+                    gaze = smp.getLeftEye().getGaze()
+                    pupil = smp.getLeftEye().getPupilSize()
 
                 # INSERT OWN CODE (EX: GAZE-CONTINGENT GRAPHICS)
 
@@ -280,7 +282,8 @@ def do_trial(trial):
                 # PC users do not need to (and we do not recommend) recording
                 # sample data this way. We write samples to the TXT file here
                 # only for illustration purposes.
-                smp_to_save = (smp.getTime(), sample[0], sample[1])
+                print(gaze, pupil)
+                smp_to_save = (smp.getTime(), gaze[0], gaze[1])
                 sample_txt.write('%.1f\t%.2f\t%.2f\n' % smp_to_save)
 
     # close the TXT file
