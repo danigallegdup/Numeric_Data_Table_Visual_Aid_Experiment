@@ -43,6 +43,10 @@ def start_mainlog():
         csv.writer(f).writerow(variable_names)
 
 def both_screen(data_dictionary):
+    
+    for key in data_dictionary:
+        print(key)
+    
     start_mainlog()
     controller = Controller()
 
