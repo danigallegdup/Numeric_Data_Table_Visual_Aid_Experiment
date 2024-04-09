@@ -113,6 +113,10 @@ def get_task_dictionary():
 def main():
     task_dictionary = get_task_dictionary()
 
+    # experiment_package\Results\EP1_PA\EP1_PA_Results\eyetracker_log
+    file_path = "../eyetracker_log/"
+
+
     for task in task_dictionary:
         with open('PilotMe.asc', 'r') as file:
             lines = file.readlines()
@@ -126,8 +130,9 @@ def main():
                 last_occurrence = i + 1
         
         if first_occurrence is not None and last_occurrence is not None:
-            with open(f'{task}_eye_tracking.csv', 'w') as file:
+            with open(f'{file_path}{task}_eye_tracking.csv', 'w') as file:
                 for line in lines[first_occurrence:last_occurrence+1]:
+                    line = line.replace('\t', ', ')
                     file.write(line)
 
         if first_occurrence and last_occurrence:
