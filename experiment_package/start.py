@@ -94,7 +94,6 @@ def main():
     root.bind('<Escape>', on_escape)
     # Step 8: close EyeLink connection and quit display-side graphics
     el_tracker.close()
-    subprocess.call(["python", "./start_experiment.py"])
 
 if __name__ == "__main__":
     main()
