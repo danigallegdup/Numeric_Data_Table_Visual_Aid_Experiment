@@ -23,7 +23,7 @@ class EyeTracker:
     def __init__(self):
         self.el_tracker = None
         self.dummy_mode = False
-        self.edf_file_name = "PilotMe.EDF"
+        self.edf_file_name = "Miguel.EDF"
 
     def initialize_tracker(self):
         if self.dummy_mode:
