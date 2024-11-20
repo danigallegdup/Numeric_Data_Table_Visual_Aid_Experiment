@@ -1,2 +1,0 @@
-Experiment_permutation,participant_ID,Task_iteration,name_of_task,Topic,Condition,Task,Repetition,table_png,table_rendering,start_time,end_time,start_time_e,end_time_e,start_time_t,time_spent,Recorded_Answer,Prompt_col,Recorded_row_col,Expected_Answer,Expected_Answer_row_col,error,isPerfect,Is_correct
-1,A,0,anime-color-Filter-1,anime,color,1,Filter,./Experiment_Data/Tables_PNG//DS1_anime_color1.png,1,2024-04-02 16:37:37.203895,2024-04-02 16:37:51.312353,1712101057203.895,1712101071312.3533,1712101031766.534,14108.458,5,J,J,7,J,False,False,False
