@@ -22,5 +22,5 @@ This research experiemnt explores the effectiveness of using visual aids to unde
 
 ### Dependencies\How to Run
 
-- Python: Python 3.x is required.
+- Python 3.x is required.
 - Libraries: Tkinter for the GUI, PIL for image handling, and pyautogui for automating GUI interactions.
